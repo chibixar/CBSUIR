@@ -1,0 +1,23 @@
+*.app
+*.out
+*.exe
+*.json
+**/.vscode
+.vscode/
+.idea/
+
+#obj files
+*.o
+*.ko
+*.obj
+*.elf
+
+#Libraries
+*.a
+*.dll
+*.dylib
+*.so
+
+#Debug
+*.dSYM/
+*.pdb
