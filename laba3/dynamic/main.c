@@ -3,7 +3,7 @@
 
 int main(void)
 {
-    char choice;                                              // каб захоўваць y/n адказ.
+    char choice;                                                         // каб захоўваць y/n адказ.
     int rows, cols;
     int **arr2D = NULL;
     do {
@@ -18,8 +18,8 @@ int main(void)
         printf("Sorted array:");
         output(arr2D, rows, cols);                                      //выклік функцыі ўводу.
         MemoryFree(arr2D, rows);
-        printf("\nDo you want to run again? (y/n): ");        // спытаць карыстальніка ці трэба працягнуць   .
-        while ((choice = getchar()) == '\n');                 // прапускаць сімвалы новай стракі.
+        printf("\nDo you want to run again? (y/n): ");                  // спытаць карыстальніка ці трэба працягнуць   .
+        while ((choice = getchar()) == '\n');                           // прапускаць сімвалы новай стракі.
 
     } while (choice == 'y' || choice == 'Y');
  
