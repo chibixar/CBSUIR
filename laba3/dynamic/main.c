@@ -15,6 +15,7 @@ int main(void)
         printf("Enter a 2D array of %d numbers:\n", rows*cols);
         input2D(arr2D, rows, cols);                                     //выклік функцыі ўводу.
         BubbleSort(arr2D, rows, cols);                                  //выклік функцыі сартавання.
+        printf("Sorted array:");
         output(arr2D, rows, cols);                                      //выклік функцыі ўводу.
         MemoryFree(arr2D, rows);
         printf("\nDo you want to run again? (y/n): ");        // спытаць карыстальніка ці трэба працягнуць   .
