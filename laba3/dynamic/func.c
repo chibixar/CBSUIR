@@ -77,12 +77,11 @@ int GetInt(void) {
     while (1) {                                                     //бясконнцы цыкл.
 
         if (scanf("%d", &value) == 1) {                             //калі гэта цэлы лік.
-            while ((ch = getchar()) != '\n' && ch != EOF);          //чысціць буфер уводу.
+            rewind(stdin);                                          //чысціць буфер уводу.
             return value;                                           //вяртае знач. з клавіятуры.
         } else {
             printf("Invalid input. Please enter an integer.\n");
-            
-            while ((ch = getchar()) != '\n' && ch != EOF);          //чысціць буфер уводу.
+            rewind(stdin);                                          //чысціць буфер уводу.
         }
     }
 }
