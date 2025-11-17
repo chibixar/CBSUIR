@@ -5,37 +5,34 @@
 #include <stdio.h>
 #include "header.h"
 
-int main()
+int main()                                                         //пачатак асноўнай праграмы.
 {   
-    int string_size;
-    int sum = 0, digit_count = 0;
-    char* string;
-    // int* digit_arr;
-    char choice;
-    do
-    {
+    int string_size;                                               //памер радка.
+    int sum = 0;                                                   //сума лічбаў.
+    char* string;                                                  //указальнік на радок.
+    char choice;                                                   //пераменная для паўтору праграмы.
+
+    do {                                                           //цыкл паўтору праграмы.
         printf("Enter the number of characters in your string (less than 81):\n");
-        string_size = GetInt() + 1;
-        // digit_arr = digit_arr_memory_allocate(digit_arr);
-        string=(string_memory_allocate(string, string_size));
-        printf("Enter a string:\n");
-        string_input(string, string_size);
-        string_digit_word(string, &sum, &digit_count);
-        printf("Modified string:\n");
-        puts(string);
+        string_size = GetInt() + 1;                                //атрымаць памер радка (+1 для '\0').
 
-        printf("Do you want to try again? (Y/n): ");
-        choice = getchar();
-        while ((choice = getchar()) == '\n');
-        
-    } while (choice == 'Y' || choice == 'y');
+        string=(string_memory_allocate(string, string_size));      //выдзяленне памяці пад радок.
+
+        printf("Enter a string:\n");                               
+        string_input(string, string_size);                         //увод радка.
+
+        string_digit_word(string, &sum);                           //апрацоўка радка.
+
+        printf("Modified string:\n");                              
+        puts(string);                                              //вывад мадыфікаванага радка.
+
+        printf("Do you want to try again? (Y/n): ");               
+                                               
+        while ((choice = getchar()) == '\n');                      //прапускаем '\n'.
+
+    } while (choice == 'Y' || choice == 'y');                      //ўмова паўтору.
     
     
-    
-
-
-
-
- printf("Program terminated.\n");
-    return 0;
+    printf("Program terminated.\n");                               //канчатковае паведамленне.
+    return 0;                                                      //выхад з праграмы.
 }
