@@ -44,7 +44,7 @@ char** text_memory_allocate(char** text, int number_of_strings, int max_string_s
 }
 
 
-char* text_input(char** text, int number_of_strings, int max_string_size)                   
+char** text_input(char** text, int number_of_strings, int max_string_size)                   
 {
     for (int i = 0; i < number_of_strings; i++)
     {
@@ -64,12 +64,73 @@ char* text_input(char** text, int number_of_strings, int max_string_size)
     
 }
 
-text_sort_by_name(char ** text, int number_of_strings, int max_string_size)
+text_sort_by_name(char** text, int number_of_strings, int max_string_size)
 {
 
 }
 
-text_sort_by_salary(char ** text, int number_of_strings, int max_string_size, int digital_sum)
+int compare_first_letter(char** a, char** b)     
+{
+    int i = 0, j = 0;
+    while (a[i] == ' ') i++;
+    while (b[j] == ' ') j++;
+    char first_a = a[i];
+    char first_b = b[j];
+    if (b<a) return 1;
+    else return 0;
+}
+
+void swap_str(char** a, char** b) {
+    char* temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+int partition(char** text, int low, int high) {
+    char *p = *(text+low);  
+    int i = low;
+    int j = high;
+
+    while (i < j) {
+
+        while (compare_first_letter(*(text+i), p) <= 0 && i <= high - 1) {
+            i++;
+        }
+
+        while (compare_first_letter(*(text+j), p) > 0 && j >= low + 1) {
+            j--;
+        }
+
+        if (i < j) {
+            swap_str(*(text+i), *(text+j));
+        }
+    }
+
+    swap_str(*(text+i), *(text+j));
+    return j;
+}
+
+void Quick_Sort_Alphabetically(char** text, int low, int high) {
+    if (low < high) {
+        int pi = partition(text, low, high);
+        Quick_Sort_Alphabetically(text, low, pi - 1);
+        Quick_Sort_Alphabeticallyt(text, pi + 1, high);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+text_sort_by_salary(char** text, int number_of_strings, int max_string_size, int digital_sum)
 {
 
 }
