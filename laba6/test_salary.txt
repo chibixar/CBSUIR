@@ -1,0 +1,7 @@
+3
+20
+Alice 50000
+Bob 75000
+Charlie 60000
+b
+n

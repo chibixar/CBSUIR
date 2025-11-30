@@ -20,6 +20,7 @@ int compare_first_letter(const char* a, const char* b);
 int partition_name(char** text, int low, int high);
 void Quick_Sort_Alphabetically(char** text, int low, int high);
 
+int* digital_sum_memory_allocation(int *digital_sum, int number_of_strings);
 void swap_num(int* a, int* b);
 int char_isdigit(char** text, int i, int j);
 int digital_sum_calculation(char** text, int* digital_sum, int i, int j, int len);

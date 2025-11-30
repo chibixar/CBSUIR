@@ -22,7 +22,10 @@ int main(void)
         text = text_input(text, number_of_strings, max_string_size);
         printf("Sort by name: 'a'      Sort by salary: 'b'\n");
         while((ch_to_sort = getchar()) =='\n');
-        while (ch_to_sort != 'a' && ch_to_sort != 'b') printf("Invalid input. Enter an 'a' or 'b'\n");
+        while (ch_to_sort != 'a' && ch_to_sort != 'b') {
+            printf("Invalid input. Enter an 'a' or 'b'\n");
+            while((ch_to_sort = getchar()) == '\n');
+        }
         printf("Sorted text:\n");
         if(ch_to_sort == 'a') Quick_Sort_Alphabetically(text, low, high);                                                   //parametr
         else 

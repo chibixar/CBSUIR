@@ -9,11 +9,11 @@ int GetInt(void) {                                                  //функц
     char ch;                                                        
 
         if (scanf("%d", &value) == 1) {                             //калі ўведзены карэктны лік.
-            rewind(stdin);                                          //ачышчаем буфер уводу.
+            while ((ch = getchar()) != '\n' && ch != EOF);          //consume remaining characters
             return value;                                           //вяртаем лік.
         } else {                                                    //калі ўведзена не лікавое значэнне.
-            printf("Invalid input. Please enter an integer.\n");    
-            rewind(stdin);                                          //ачышчаем буфер уводу.
+            printf("Invalid input. Please enter an integer.\n");
+            while ((ch = getchar()) != '\n' && ch != EOF);          //clear the line
             return GetInt();
         }
      
@@ -171,12 +171,6 @@ void salary_find(char** text, int* digital_sum, int number_of_strings, int max_s
     {
         int j = 0, len = 0;
         while(*(*(text+i)+j) != '\0' && !char_isdigit(text, i, j)) j++;
-        // len++;
-        // while(*(*(text+i)+j+1) != ' ' && *(*(text+i)+j+1) != '\n' && *(*(text+i)+j+1) != '\0') 
-        // {
-        //     len++;
-        //     j++;
-        // }
         while (char_isdigit(text, i, j)) {
             len++;
             j++;
@@ -185,7 +179,6 @@ void salary_find(char** text, int* digital_sum, int number_of_strings, int max_s
             digital_sum_calculation(text, digital_sum, i, j - 1, len);
          else 
             digital_sum[i] = 0;
-
     }
     
 }
@@ -198,29 +191,26 @@ int compare_salary(const int* a, const int* b)
 }
 
 int partition_salary(char** text, int* digital_sum, int low, int high) {
-    int p = *(digital_sum+low);  
-    int i = low;
-    int j = high;
-
-    while (i < j) {
-
-        while (digital_sum[i] <= p && i <= high - 1) {
+    printf("DEBUG: partition_salary called with low=%d, high=%d\n", low, high);
+    printf("DEBUG: digital_sum pointer = %p\n", (void*)digital_sum);
+    int p = digital_sum[high];
+    printf("DEBUG: pivot = %d (digital_sum[%d])\n", p, high);
+    int i = low - 1;
+    
+    for (int j = low; j < high; j++) {
+        printf("DEBUG: j=%d, digital_sum[%d]=%d, p=%d\n", j, j, digital_sum[j], p);
+        if (digital_sum[j] <= p) {
             i++;
-        }
-
-        while (digital_sum[j] > p && j >= low + 1) {
-            j--;
-        }
-
-        if (i < j) {
-            swap_str(*(text+i), *(text+j));
-            swap_num(*(digital_sum+i), *(digital_sum+j));
+            printf("DEBUG: swapping i=%d with j=%d\n", i, j);
+            swap_str(text+i, text+j);
+            swap_num(digital_sum+i, digital_sum+j);
         }
     }
-
-    swap_str(*(text+low), *(text+j));
-    swap_num(*(digital_sum+low), *(digital_sum+j));
-    return j;
+    
+    printf("DEBUG: final swap: i+1=%d with high=%d\n", i+1, high);
+    swap_str(text+i+1, text+high);
+    swap_num(digital_sum+i+1, digital_sum+high);
+    return i + 1;
 }
 
 void Quick_Sort_By_Salary(char** text, int* digital_sum, int low, int high, int number_of_strings, int max_string_size) 

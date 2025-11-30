@@ -1,0 +1,6 @@
+2
+55
+Petrov 67895
+Zuckerberg 98765
+a
+n
