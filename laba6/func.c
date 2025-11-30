@@ -1,7 +1,8 @@
 #include <stdio.h>                                                  
 #include <stdlib.h>                                                 
 #include "header.h"                                                 
-#include <string.h>  
+#include <string.h> 
+#include <math.h> 
 
 int GetInt(void) {                                                  //функцыя бяспечнага ўводу цэлага ліку.
     int value;                                                      
@@ -30,7 +31,7 @@ char** text_memory_allocate(char** text, int number_of_strings, int max_string_s
     }  
     for (int i = 0; i < number_of_strings; i++)
     {
-         *(text + i) = (int*)malloc(max_string_size * sizeof(char));            // выдзяляем памяць пад элементы кожнага радка.
+         *(text + i) = (char*)malloc(max_string_size * sizeof(char));            // выдзяляем памяць пад элементы кожнага радка.
         if (*(text + i) == NULL)                                  // правяраем, ці атрымалася выдзеліць памяць для радка.
         {
             printf("Memory allocation failed.");                   
@@ -44,6 +45,12 @@ char** text_memory_allocate(char** text, int number_of_strings, int max_string_s
                     
 }
 
+void text_free(char **text, int number_of_strings)
+{
+    for (int i = 0; i < number_of_strings; ++i) free(text[i]);
+    free(text);
+}
+
 int* digital_sum_memory_allocation(int *digital_sum, int number_of_strings)
 {
     digital_sum = (int*)calloc(number_of_strings, sizeof(int));
@@ -52,6 +59,7 @@ int* digital_sum_memory_allocation(int *digital_sum, int number_of_strings)
         printf("Memory allocation failed");                         
         exit(1);                                                    //завяршэнне пры памылцы.
     }  
+    return digital_sum;
 }
 
 
@@ -78,11 +86,6 @@ void output_text(char** text, int number_of_strings)
         puts(*(text+i));
 }
 
-text_sort_by_name(char** text, int number_of_strings, int max_string_size)
-{
-
-}
-
 int compare_first_letter(const char* a, const char* b)
 {
     while (*a == ' ') a++;
@@ -103,7 +106,7 @@ int partition_name(char** text, int low, int high) {
 
     while (i < j) {
 
-        while (compare_first_letter(*(text+i), p) <= 0 && i <= high - 1) {
+        while (compare_first_letter(*(text+i), p) < 0 && i <= high - 1) {
             i++;
         }
 
@@ -133,15 +136,25 @@ void Quick_Sort_Alphabetically(char** text, int low, int high) {
 
 
 
+void swap_num(int *a, int *b)
+{
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
 
 int char_isdigit(char** text, int i, int j)                               
 {
-    if (*(*(text+i)+j) >= LOWEST_ASCII_DIGIT && text[i] <= HIGHEST_ASCII_DIGIT)
+    if (*(*(text+i)+j) >= LOWEST_ASCII_DIGIT && *(*(text+i)+j) <= HIGHEST_ASCII_DIGIT)
     return 1; else return 0;                                        //праверка, ці з'яўляецца сімвал лічбай.
 }
 
-digital_sum_calculation(int* digital_sum, int i, int j, int len)
+int digital_sum_calculation(char** text, int* digital_sum, int i, int j, int len)
 {
+    int k = j;
+    for (int l = 0; l < len; l++, k--)
+        *(digital_sum+i) += (text[i][k] - '0')*powf(10, l) ;
+    return digital_sum[i];
     
 }
 
@@ -150,6 +163,7 @@ void salary_find(char** text, int* digital_sum, int number_of_strings, int max_s
     for (int i = 0; i < number_of_strings; i++)
     {
         int j = 0, len = 0;
+        while(*((text+i)+j) != '\0' && *((text+i)+j) != '\n')
         while(*(*(text+i)+j) != ' ' || !char_isdigit(text, i, j+1)) j++;
         j++; len++;
         while(*(*(text+i)+j+1) != ' ' && *(*(text+i)+j+1) != '\n' && *(*(text+i)+j+1) != '\0') 
@@ -157,6 +171,7 @@ void salary_find(char** text, int* digital_sum, int number_of_strings, int max_s
             len++;
             j++;
         }
+        digital_sum_calculation(text, digital_sum, i, j, len);
 
     }
     
@@ -166,38 +181,42 @@ int compare_salary(const int* a, const int* b)
 {
     while (*a == ' ') a++;
     while (*b == ' ') b++;
-    return (int)*a - (int)*b;
+    return *a - *b;
 }
 
 int partition_salary(char** text, int* digital_sum, int low, int high) {
-    char *p = *(digital_sum+low);  
+    int p = *(digital_sum+low);  
     int i = low;
     int j = high;
 
     while (i < j) {
 
-        while (compare_salary(*(digital_sum+i), p) <= 0 && i <= high - 1) {
+        while (digital_sum[i] <= p && i <= high - 1) {
             i++;
         }
 
-        while (compare_salary(*(digital_sum+j), p) > 0 && j >= low + 1) {
+        while (digital_sum[j] > p && j >= low + 1) {
             j--;
         }
 
         if (i < j) {
             swap_str(*(text+i), *(text+j));
+            swap_num(*(digital_sum+i), *(digital_sum+j));
         }
     }
 
     swap_str(*(text+low), *(text+j));
+    swap_num(*(digital_sum+low), *(digital_sum+j));
     return j;
 }
 
-void Quick_Sort_Alphabetically(char** text, int* digital_sum, int low, int high) {
+void Quick_Sort_By_Salary(char** text, int* digital_sum, int low, int high, int number_of_strings, int max_string_size) 
+{
+    salary_find(text, digital_sum, number_of_strings, max_string_size);
     if (low < high) {
         int pi = partition_salary(text, digital_sum, low, high);
-        Quick_Sort_Alphabetically(text, low, pi - 1);
-        Quick_Sort_Alphabetically(text, pi + 1, high);
+        Quick_Sort_By_Salary(text, digital_sum, low, pi - 1, number_of_strings, max_string_size);
+        Quick_Sort_By_Salary(text, digital_sum, pi + 1, high, number_of_strings,max_string_size);
     }
 }
 

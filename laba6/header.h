@@ -7,13 +7,21 @@
 
 int GetInt(void);                                                  //прататып функцыі ўводу цэлага ліку.
 char** text_memory_allocate(char** text, int number_of_strings, int max_string_size);
+void text_free(char **text, int number_of_strings);
 char** text_input(char** text, int number_of_strings, int max_string_size);
+void output_text(char** text, int number_of_strings);
 void swap_str(char** a, char** b);
 int compare_first_letter(const char* a, const char* b);
 int partition_name(char** text, int low, int high);
 void Quick_Sort_Alphabetically(char** text, int low, int high);
-void output_text(char** text, int number_of_strings);
 
+void swap_num(int* a, int* b);
+int char_isdigit(char** text, int i, int j);
+int digital_sum_calculation(char** text, int* digital_sum, int i, int j, int len);
+void salary_find(char** text, int* digital_sum, int number_of_strings, int max_string_size);
+int compare_salary(const int* a, const int* b);
+int partition_salary(char** text, int* digital_sum, int low, int high);
+void Quick_Sort_By_Salary(char** text, int* digital_sum, int low, int high ,int number_of_strings, int max_string_size);
 // int word_isdigit(char* string, int* sum, int i);                   //прататып функцыі праверка слова на лічбавы фармат.
 // int char_isdigit(char* string, int i);                             //прататып функцыі праверка аднаго сімвала.
 
