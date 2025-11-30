@@ -8,7 +8,7 @@ int main(void)
     char** text;
     int number_of_strings, max_string_size;
     int low, high;
-    int digital_sum;
+    int* digital_sum;
     do
     {
         digital_sum = 0;
@@ -25,7 +25,11 @@ int main(void)
         while (ch_to_sort != 'a' && ch_to_sort != 'b') printf("Invalid input. Enter an 'a' or 'b'\n");
         printf("Sorted text:\n");
         if(ch_to_sort == 'a') Quick_Sort_Alphabetically(text, low, high);                                                   //parametr
-        // else text = text_sort_by_salary();                                                                  //parametr
+        else 
+        {
+            digital_sum = digital_sum_memory_allocation(digital_sum, number_of_strings);
+            Quick_Sort_By_Name(text, low, high);
+        }                                                                //parametr
         output_text(text, number_of_strings);                                                                                           //
 
         printf("Do you want to try again? (Y/n): ");

@@ -44,6 +44,16 @@ char** text_memory_allocate(char** text, int number_of_strings, int max_string_s
                     
 }
 
+int* digital_sum_memory_allocation(int *digital_sum, int number_of_strings)
+{
+    digital_sum = (int*)calloc(number_of_strings, sizeof(int));
+    if (digital_sum == NULL) 
+    {
+        printf("Memory allocation failed");                         
+        exit(1);                                                    //завяршэнне пры памылцы.
+    }  
+}
+
 
 char** text_input(char** text, int number_of_strings, int max_string_size)                   
 {
@@ -86,7 +96,7 @@ void swap_str(char** a, char** b) {
     *b = temp;
 }
 
-int partition(char** text, int low, int high) {
+int partition_name(char** text, int low, int high) {
     char *p = *(text+low);  
     int i = low;
     int j = high;
@@ -112,11 +122,89 @@ int partition(char** text, int low, int high) {
 
 void Quick_Sort_Alphabetically(char** text, int low, int high) {
     if (low < high) {
-        int pi = partition(text, low, high);
+        int pi = partition_name(text, low, high);
         Quick_Sort_Alphabetically(text, low, pi - 1);
         Quick_Sort_Alphabetically(text, pi + 1, high);
     }
 }
+
+
+
+
+
+
+
+int char_isdigit(char** text, int i, int j)                               
+{
+    if (*(*(text+i)+j) >= LOWEST_ASCII_DIGIT && text[i] <= HIGHEST_ASCII_DIGIT)
+    return 1; else return 0;                                        //праверка, ці з'яўляецца сімвал лічбай.
+}
+
+digital_sum_calculation(int* digital_sum, int i, int j, int len)
+{
+    
+}
+
+void salary_find(char** text, int* digital_sum, int number_of_strings, int max_string_size)
+{
+    for (int i = 0; i < number_of_strings; i++)
+    {
+        int j = 0, len = 0;
+        while(*(*(text+i)+j) != ' ' || !char_isdigit(text, i, j+1)) j++;
+        j++; len++;
+        while(*(*(text+i)+j+1) != ' ' && *(*(text+i)+j+1) != '\n' && *(*(text+i)+j+1) != '\0') 
+        {
+            len++;
+            j++;
+        }
+
+    }
+    
+}
+
+int compare_salary(const int* a, const int* b)
+{
+    while (*a == ' ') a++;
+    while (*b == ' ') b++;
+    return (int)*a - (int)*b;
+}
+
+int partition_salary(char** text, int* digital_sum, int low, int high) {
+    char *p = *(digital_sum+low);  
+    int i = low;
+    int j = high;
+
+    while (i < j) {
+
+        while (compare_salary(*(digital_sum+i), p) <= 0 && i <= high - 1) {
+            i++;
+        }
+
+        while (compare_salary(*(digital_sum+j), p) > 0 && j >= low + 1) {
+            j--;
+        }
+
+        if (i < j) {
+            swap_str(*(text+i), *(text+j));
+        }
+    }
+
+    swap_str(*(text+low), *(text+j));
+    return j;
+}
+
+void Quick_Sort_Alphabetically(char** text, int* digital_sum, int low, int high) {
+    if (low < high) {
+        int pi = partition_salary(text, digital_sum, low, high);
+        Quick_Sort_Alphabetically(text, low, pi - 1);
+        Quick_Sort_Alphabetically(text, pi + 1, high);
+    }
+}
+
+
+
+
+
 
 
 
@@ -190,8 +278,3 @@ void Quick_Sort_Alphabetically(char** text, int low, int high) {
 //     return 1;                                                       //слова складаецца з лічбаў.
 // }
 
-// int char_isdigit(char** text, int i)                               
-// {
-//     if (text[i] >= LOWEST_ASCII_DIGIT && text[i] <= HIGHEST_ASCII_DIGIT)
-//     return 1; else return 0;                                        //праверка, ці з'яўляецца сімвал лічбай.
-// }
