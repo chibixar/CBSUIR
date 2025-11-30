@@ -191,23 +191,18 @@ int compare_salary(const int* a, const int* b)
 }
 
 int partition_salary(char** text, int* digital_sum, int low, int high) {
-    printf("DEBUG: partition_salary called with low=%d, high=%d\n", low, high);
-    printf("DEBUG: digital_sum pointer = %p\n", (void*)digital_sum);
+
     int p = digital_sum[high];
-    printf("DEBUG: pivot = %d (digital_sum[%d])\n", p, high);
     int i = low - 1;
     
     for (int j = low; j < high; j++) {
-        printf("DEBUG: j=%d, digital_sum[%d]=%d, p=%d\n", j, j, digital_sum[j], p);
         if (digital_sum[j] <= p) {
             i++;
-            printf("DEBUG: swapping i=%d with j=%d\n", i, j);
             swap_str(text+i, text+j);
             swap_num(digital_sum+i, digital_sum+j);
         }
     }
     
-    printf("DEBUG: final swap: i+1=%d with high=%d\n", i+1, high);
     swap_str(text+i+1, text+high);
     swap_num(digital_sum+i+1, digital_sum+high);
     return i + 1;

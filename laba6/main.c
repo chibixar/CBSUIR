@@ -18,6 +18,7 @@ int main(void)
         high = number_of_strings - 1;
         printf("Enter the number of characters in the longest string (less than 81):\n");
         max_string_size = GetInt() + 1;
+        printf("Enter the text:\n");
         text = text_memory_allocate(text, number_of_strings, max_string_size);
         text = text_input(text, number_of_strings, max_string_size);
         printf("Sort by name: 'a'      Sort by salary: 'b'\n");
