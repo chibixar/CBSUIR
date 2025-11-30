@@ -28,7 +28,9 @@ int main(void)
         else 
         {
             digital_sum = digital_sum_memory_allocation(digital_sum, number_of_strings);
+            salary_find(text, digital_sum, number_of_strings, max_string_size);
             Quick_Sort_By_Salary(text, digital_sum, low, high, number_of_strings, max_string_size);
+            free(digital_sum);
         }                                                                //parametr
         output_text(text, number_of_strings);                                                                                           //
         text_free(text, number_of_strings);

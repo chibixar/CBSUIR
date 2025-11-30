@@ -69,9 +69,9 @@ char** text_input(char** text, int number_of_strings, int max_string_size)
     {
        fgets(*(text+i), max_string_size, stdin);                //чытанне радка з клавіятуры.
         
-    // size_t len = strlen(text[i]);                                    //выдаляем \n з канца каб не ламаць логіку калі апошняе слова з лічбаў.                      //!IDK
-    // if (len > 0 && text[i][len-1]=='\n')
-    //     text[i][len-1]='\0';
+    size_t len = strlen(text[i]);                                    //выдаляем \n з канца каб не ламаць логіку калі апошняе слова з лічбаў.                      //!IDK
+    if (len > 0 && text[i][len-1]=='\n')
+        text[i][len-1]='\0';
     
     
 }
@@ -124,7 +124,8 @@ int partition_name(char** text, int low, int high) {
 }
 
 void Quick_Sort_Alphabetically(char** text, int low, int high) {
-    if (low < high) {
+    if (low < high)
+    {
         int pi = partition_name(text, low, high);
         Quick_Sort_Alphabetically(text, low, pi - 1);
         Quick_Sort_Alphabetically(text, pi + 1, high);
@@ -145,6 +146,7 @@ void swap_num(int *a, int *b)
 
 int char_isdigit(char** text, int i, int j)                               
 {
+    if (text[i][j] == '\0') return 0;
     if (*(*(text+i)+j) >= LOWEST_ASCII_DIGIT && *(*(text+i)+j) <= HIGHEST_ASCII_DIGIT)
     return 1; else return 0;                                        //праверка, ці з'яўляецца сімвал лічбай.
 }
@@ -152,8 +154,13 @@ int char_isdigit(char** text, int i, int j)
 int digital_sum_calculation(char** text, int* digital_sum, int i, int j, int len)
 {
     int k = j;
+    *(digital_sum+i)=0;
+    int multiplier = 1;
     for (int l = 0; l < len; l++, k--)
-        *(digital_sum+i) += (text[i][k] - '0')*powf(10, l) ;
+    {
+        *(digital_sum+i) += (text[i][k] - '0')*multiplier ;
+        multiplier *= 10;
+    }
     return digital_sum[i];
     
 }
@@ -163,15 +170,21 @@ void salary_find(char** text, int* digital_sum, int number_of_strings, int max_s
     for (int i = 0; i < number_of_strings; i++)
     {
         int j = 0, len = 0;
-        while(*((text+i)+j) != '\0' && *((text+i)+j) != '\n')
-        while(*(*(text+i)+j) != ' ' || !char_isdigit(text, i, j+1)) j++;
-        j++; len++;
-        while(*(*(text+i)+j+1) != ' ' && *(*(text+i)+j+1) != '\n' && *(*(text+i)+j+1) != '\0') 
-        {
+        while(*(*(text+i)+j) != '\0' && !char_isdigit(text, i, j)) j++;
+        // len++;
+        // while(*(*(text+i)+j+1) != ' ' && *(*(text+i)+j+1) != '\n' && *(*(text+i)+j+1) != '\0') 
+        // {
+        //     len++;
+        //     j++;
+        // }
+        while (char_isdigit(text, i, j)) {
             len++;
             j++;
         }
-        digital_sum_calculation(text, digital_sum, i, j, len);
+        if (len > 0) 
+            digital_sum_calculation(text, digital_sum, i, j - 1, len);
+         else 
+            digital_sum[i] = 0;
 
     }
     
@@ -212,7 +225,7 @@ int partition_salary(char** text, int* digital_sum, int low, int high) {
 
 void Quick_Sort_By_Salary(char** text, int* digital_sum, int low, int high, int number_of_strings, int max_string_size) 
 {
-    salary_find(text, digital_sum, number_of_strings, max_string_size);
+    
     if (low < high) {
         int pi = partition_salary(text, digital_sum, low, high);
         Quick_Sort_By_Salary(text, digital_sum, low, pi - 1, number_of_strings, max_string_size);

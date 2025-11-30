@@ -5,6 +5,11 @@
 #define HIGHEST_ASCII_DIGIT 57                                     //максімальны ASCII код лічбы.
 #define SPACE 32                                                   //ASCII код прабелу.
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+
 int GetInt(void);                                                  //прататып функцыі ўводу цэлага ліку.
 char** text_memory_allocate(char** text, int number_of_strings, int max_string_size);
 void text_free(char **text, int number_of_strings);
