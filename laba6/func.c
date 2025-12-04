@@ -86,12 +86,14 @@ void output_text(char** text, int number_of_strings)
         puts(*(text+i));
 }
 
-int compare_first_letter(const char* a, const char* b)
+int compare_first_letter(const char* a, const char* b)          //калі а < b вяртае адмоўны
 {
     while (*a == ' ') a++;
     while (*b == ' ') b++;
     return (unsigned char)*a - (unsigned char)*b;
 }
+
+// int compare_first_letter(char **)
 
 void swap_str(char** a, char** b) {
     char* temp = *a;
@@ -103,23 +105,29 @@ int partition_name(char** text, int low, int high) {
     char *p = *(text+low);  
     int i = low;
     int j = high;
-
+printf("Debug: i:%d  j:%d", i, j);
     while (i < j) {
 
         while (compare_first_letter(*(text+i), p) < 0 && i <= high - 1) {
             i++;
+printf("Debug: i:%d  j:%d", i, j);
+
         }
 
         while (compare_first_letter(*(text+j), p) > 0 && j >= low + 1) {
             j--;
+printf("Debug: i:%d  j:%d", i, j);
+
         }
 
         if (i < j) {
-            swap_str(*(text+i), *(text+j));
+            swap_str(text+i, text+j);
         }
     }
 
-    swap_str(*(text+low), *(text+j));
+    swap_str(text+low, text+j);
+printf("Debug: i:%d  j:%d\n", i, j);
+
     return j;
 }
 
@@ -183,41 +191,50 @@ void salary_find(char** text, int* digital_sum, int number_of_strings, int max_s
     
 }
 
-int compare_salary(const int* a, const int* b)
+
+void QuickSort_Name(char ** text, int low, int high)
 {
-    while (*a == ' ') a++;
-    while (*b == ' ') b++;
-    return *a - *b;
-}
-
-int partition_salary(char** text, int* digital_sum, int low, int high) {
-
-    int p = digital_sum[high];
-    int i = low - 1;
+    int i = low;
+    int j = high;
+    char *p = *(text+((low+high)/2));
     
-    for (int j = low; j < high; j++) {
-        if (digital_sum[j] <= p) {
-            i++;
+    while (i<=j)
+    {
+        while(compare_first_letter(*(text+i), p)<0) i++;
+        while(compare_first_letter(p, *(text+j))<0) j--;
+        if (i<=j)
+        {
             swap_str(text+i, text+j);
-            swap_num(digital_sum+i, digital_sum+j);
+            i++; j--;
         }
+        if(low<j) QuickSort_Name(text, low, j);
+        if(i<high) QuickSort_Name(text, i, high);
     }
-    
-    swap_str(text+i+1, text+high);
-    swap_num(digital_sum+i+1, digital_sum+high);
-    return i + 1;
+     
 }
 
-void Quick_Sort_By_Salary(char** text, int* digital_sum, int low, int high, int number_of_strings, int max_string_size) 
+void QuickSort_Salary(char ** text, int low, int high, int* digital_sum)
 {
     
-    if (low < high) {
-        int pi = partition_salary(text, digital_sum, low, high);
-        Quick_Sort_By_Salary(text, digital_sum, low, pi - 1, number_of_strings, max_string_size);
-        Quick_Sort_By_Salary(text, digital_sum, pi + 1, high, number_of_strings,max_string_size);
+    int i=low;
+    int j=high;
+    int p=digital_sum[(low+high)/2];
+    while (i<=j)
+    {
+        while (digital_sum[i]<p) i++;
+        while(p<digital_sum[j]) j--;
+        if (i<=j)
+        {
+            swap_num(digital_sum+i,digital_sum+j);
+            swap_str(text+i,text+j);
+            i++; j--;
+        }
+        if(low<j) QuickSort_Salary(text,low,j,digital_sum);
+        if(i<high) QuickSort_Salary(text,i,high,digital_sum);
+        
     }
+    
 }
-
 
 
 

@@ -28,12 +28,13 @@ int main(void)
             while((ch_to_sort = getchar()) == '\n');
         }
         printf("Sorted text:\n");
-        if(ch_to_sort == 'a') Quick_Sort_Alphabetically(text, low, high);                                                   //parametr
+        if(ch_to_sort == 'a') QuickSort_Name(text, low, high); //Quick_Sort_Alphabetically(text, low, high);                                                   //parametr
         else 
         {
             digital_sum = digital_sum_memory_allocation(digital_sum, number_of_strings);
             salary_find(text, digital_sum, number_of_strings, max_string_size);
-            Quick_Sort_By_Salary(text, digital_sum, low, high, number_of_strings, max_string_size);
+            //Quick_Sort_By_Salary(text, digital_sum, low, high, number_of_strings, max_string_size);
+            QuickSort_Salary(text, low, high, digital_sum);
             free(digital_sum);
         }                                                                //parametr
         output_text(text, number_of_strings);                                                                                           //

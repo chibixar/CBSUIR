@@ -19,16 +19,12 @@ void swap_str(char** a, char** b);
 int compare_first_letter(const char* a, const char* b);
 int partition_name(char** text, int low, int high);
 void Quick_Sort_Alphabetically(char** text, int low, int high);
+void QuickSort_Name(char ** text, int low, int high);
 
 int* digital_sum_memory_allocation(int *digital_sum, int number_of_strings);
 void swap_num(int* a, int* b);
 int char_isdigit(char** text, int i, int j);
 int digital_sum_calculation(char** text, int* digital_sum, int i, int j, int len);
 void salary_find(char** text, int* digital_sum, int number_of_strings, int max_string_size);
-int compare_salary(const int* a, const int* b);
-int partition_salary(char** text, int* digital_sum, int low, int high);
-void Quick_Sort_By_Salary(char** text, int* digital_sum, int low, int high ,int number_of_strings, int max_string_size);
-// int word_isdigit(char* string, int* sum, int i);                   //прататып функцыі праверка слова на лічбавы фармат.
-// int char_isdigit(char* string, int i);                             //прататып функцыі праверка аднаго сімвала.
-
+void QuickSort_Salary(char ** text, int low, int high, int* digital_sum);
 #endif         
