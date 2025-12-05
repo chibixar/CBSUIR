@@ -1,8 +1,6 @@
 // Даны натуральное число n и символы S1,...,Sn. Строку s1,...,sn обработать
 // так, чтобы все слова, состоящие только из цифр, были удалены, их сумма стояла
 // последним словом в строке.
-
-#include <stdio.h>
 #include "header.h"
 
 int main()                                                         //пачатак асноўнай праграмы.
@@ -16,7 +14,7 @@ int main()                                                         //пачат�
         printf("Enter the number of characters in your string (less than 81):\n");
         string_size = GetInt() + 1;                                //атрымаць памер радка (+1 для '\0').
 
-        string=(string_memory_allocate(string, string_size));      //выдзяленне памяці пад радок.
+        string_memory_allocate(&string, string_size);              //выдзяленне памяці пад радок.
 
         printf("Enter a string:\n");                               
         string_input(string, string_size);                         //увод радка.
@@ -25,7 +23,7 @@ int main()                                                         //пачат�
 
         printf("Modified string:\n");                              
         puts(string);                                              //вывад мадыфікаванага радка.
-
+        free(string);
         printf("Do you want to try again? (Y/n): ");               
                                                
         while ((choice = getchar()) == '\n');                      //прапускаем '\n'.

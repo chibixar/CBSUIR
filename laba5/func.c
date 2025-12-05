@@ -1,7 +1,4 @@
-#include <stdio.h>                                                  
-#include <stdlib.h>                                                 
-#include "header.h"                                                 
-#include <string.h>                                                 
+#include "header.h"                                                                                               
 
 int GetInt(void) {                                                  //функцыя бяспечнага ўводу цэлага ліку.
     int value;                                                      
@@ -9,29 +6,28 @@ int GetInt(void) {                                                  //функц
 
     while (1) {                                                     //бясконцы цыкл.
         if (scanf("%d", &value) == 1) {                             //калі ўведзены карэктны лік.
-            rewind(stdin);                                          //ачышчаем буфер уводу.
+            while ((ch = getchar()) != '\n' && ch != EOF);          //ачышчаем буфер уводу.
             return value;                                           //вяртаем лік.
         } else {                                                    //калі ўведзена не лікавое значэнне.
             printf("Invalid input. Please enter an integer.\n");    
-            rewind(stdin);                                          //ачышчаем буфер уводу.
+            while ((ch = getchar()) != '\n' && ch != EOF);          //ачышчаем буфер уводу.
         }
     }
 }
 
 
-char* string_memory_allocate(char* string, int string_size)         
+void string_memory_allocate(char** string, int string_size)         
 {                                                                   
-    string = (char*)malloc(string_size*sizeof(char));               //выдзяляем памяць пад радок.
-    if (string == NULL)                                             //праверка паспяховасці выдзялення.
+    *string = (char*)malloc(string_size*sizeof(char));              //выдзяляем памяць пад радок.
+    if (*string == NULL)                                            //праверка паспяховасці выдзялення.
     {
-        printf("Memory allocation failed");                         
+        printf("Memory allocation failed");  
         exit(1);                                                    //завяршэнне пры памылцы.
     }
-    return string;                                                  //вяртаем адрас радка.
 }
 
 
-char* string_input(char* string, int string_size)                   
+void string_input(char* string, int string_size)                   
 {
     if (fgets(string, string_size, stdin) == NULL)                  //чытанне радка з клавіятуры.
     {
@@ -41,9 +37,6 @@ char* string_input(char* string, int string_size)
     size_t len = strlen(string);                                    //выдаляем \n з канца каб не ламаць логіку калі апошняе слова з лічбаў.
     if (len > 0 && string[len-1]=='\n')
         string[len-1]='\0';
-    
-    
-    return string;                                             //вяртаем уведзены радок.
 }
 
 
@@ -57,7 +50,7 @@ void string_digit_word(char* string, int* sum)
         int k = i;
         while(string[k] != '\0' && string[k] != ' ') k++;
         int len = k-i;
-        if(word_isdigit(string, sum, i))               //калі слова складаецца з лічбаў.
+        if(word_isdigit(string, sum, i))                            //калі слова складаецца з лічбаў.
             i = k;                                                  //пераскокваем гэта слова.
         else 
         {
@@ -70,7 +63,7 @@ void string_digit_word(char* string, int* sum)
             
             
         }
-                                       //копіруем сімвал, калі гэта не лічбы.
+                                    
     }
     string[j]='\0';                                                 //ставім канец радка.
 
@@ -93,7 +86,7 @@ int word_isdigit(char* string, int* sum, int i)
     {
         if (!char_isdigit(string, k))                               //калі хоць адзін сімвал не лічба.
             return 0;                                               
-        temp_sum += (string[k] - '0');                              //дадаём лічбу да сумы.
+        temp_sum += (string[k] - '0');                              //дадаём лічбу да сумы. НЕ АСКІ
                 
     }
                                                    
