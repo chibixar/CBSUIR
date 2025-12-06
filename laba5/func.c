@@ -43,7 +43,7 @@ char* string_input(char* string, int string_size)
         string[len-1]='\0';
     
     
-    return string;                                             //вяртаем уведзены радок.
+    return string;                                                  //вяртаем уведзены радок.
 }
 
 
@@ -57,7 +57,7 @@ void string_digit_word(char* string, int* sum)
         int k = i;
         while(string[k] != '\0' && string[k] != ' ') k++;
         int len = k-i;
-        if(word_isdigit(string, sum, i))               //калі слова складаецца з лічбаў.
+        if(word_isdigit(string, sum, i))                            //калі слова складаецца з лічбаў.
             i = k;                                                  //пераскокваем гэта слова.
         else 
         {
@@ -70,7 +70,7 @@ void string_digit_word(char* string, int* sum)
             
             
         }
-                                       //копіруем сімвал, калі гэта не лічбы.
+
     }
     string[j]='\0';                                                 //ставім канец радка.
 

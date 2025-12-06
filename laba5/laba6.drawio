@@ -1,48 +1,48 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36" version="28.2.8">
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36" version="29.2.3">
   <diagram name="Page-1" id="JU_OZVbYkPAHrzNFDajx">
-    <mxGraphModel dx="1042" dy="542" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1426" dy="757" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="m0Syrhft76wmd6MZbutZ-8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="m0Syrhft76wmd6MZbutZ-1" target="m0Syrhft76wmd6MZbutZ-5" edge="1">
+        <mxCell id="m0Syrhft76wmd6MZbutZ-8" edge="1" parent="1" source="m0Syrhft76wmd6MZbutZ-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="m0Syrhft76wmd6MZbutZ-5" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="m0Syrhft76wmd6MZbutZ-1" value="Пачатак" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;" parent="1" vertex="1">
-          <mxGeometry x="310" y="150" width="140" height="35" as="geometry" />
+        <mxCell id="m0Syrhft76wmd6MZbutZ-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;" value="Пачатак" vertex="1">
+          <mxGeometry height="35" width="140" x="310" y="150" as="geometry" />
         </mxCell>
-        <mxCell id="m0Syrhft76wmd6MZbutZ-12" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" target="m0Syrhft76wmd6MZbutZ-7" edge="1">
+        <mxCell id="m0Syrhft76wmd6MZbutZ-12" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="m0Syrhft76wmd6MZbutZ-7" value="">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="380" y="810" as="sourcePoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="m0Syrhft76wmd6MZbutZ-10" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="m0Syrhft76wmd6MZbutZ-3" target="m0Syrhft76wmd6MZbutZ-4" edge="1">
+        <mxCell id="m0Syrhft76wmd6MZbutZ-10" edge="1" parent="1" source="m0Syrhft76wmd6MZbutZ-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="m0Syrhft76wmd6MZbutZ-4" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="m0Syrhft76wmd6MZbutZ-3" value="ф string_input().&lt;div&gt;Увод радку з клавіятуры&lt;/div&gt;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" parent="1" vertex="1">
-          <mxGeometry x="310" y="510" width="140" height="70" as="geometry" />
+        <mxCell id="m0Syrhft76wmd6MZbutZ-3" parent="1" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" value="ф string_input().&lt;div&gt;Увод радку з клавіятуры&lt;/div&gt;" vertex="1">
+          <mxGeometry height="70" width="140" x="310" y="510" as="geometry" />
         </mxCell>
-        <mxCell id="m0Syrhft76wmd6MZbutZ-11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="m0Syrhft76wmd6MZbutZ-4" edge="1">
+        <mxCell id="m0Syrhft76wmd6MZbutZ-11" edge="1" parent="1" source="m0Syrhft76wmd6MZbutZ-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" value="">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="380" y="740" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="m0Syrhft76wmd6MZbutZ-4" value="ф.&amp;nbsp;string_digit_word&lt;div&gt;Апрацоўка радку паводле задачы.&lt;/div&gt;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" parent="1" vertex="1">
-          <mxGeometry x="310" y="630" width="140" height="70" as="geometry" />
+        <mxCell id="m0Syrhft76wmd6MZbutZ-4" parent="1" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" value="ф.&amp;nbsp;string_digit_word()&lt;div&gt;Апрацоўка радку паводле задачы.&lt;/div&gt;" vertex="1">
+          <mxGeometry height="70" width="140" x="310" y="630" as="geometry" />
         </mxCell>
-        <mxCell id="m0Syrhft76wmd6MZbutZ-5" value="Пр:string - радок.&amp;nbsp; string_size - памер радку. sum - сума лічбаў. digit_count - падлік лічбаў. choice - для зац." style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="310" y="210" width="140" height="72" as="geometry" />
+        <mxCell id="m0Syrhft76wmd6MZbutZ-5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Пр:string - радок.&amp;nbsp; string_size - памер радку. sum - сума лічбаў. digit_count - падлік лічбаў. choice - для зац." vertex="1">
+          <mxGeometry height="72" width="140" x="310" y="210" as="geometry" />
         </mxCell>
-        <mxCell id="m0Syrhft76wmd6MZbutZ-7" value="Канец" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;" parent="1" vertex="1">
-          <mxGeometry x="310" y="840" width="140" height="35" as="geometry" />
+        <mxCell id="m0Syrhft76wmd6MZbutZ-7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;" value="Канец" vertex="1">
+          <mxGeometry height="35" width="140" x="310" y="840" as="geometry" />
         </mxCell>
-        <mxCell id="Hxwv0aaDRKQmVLQrkZwk-2" value="ф. GetInt().&lt;div&gt;Увод памеру радку з клавіятуры&lt;/div&gt;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
-          <mxGeometry x="310" y="310" width="140" height="70" as="geometry" />
+        <mxCell id="Hxwv0aaDRKQmVLQrkZwk-2" parent="1" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" value="ф. GetInt().&lt;div&gt;Увод памеру радку з клавіятуры&lt;/div&gt;" vertex="1">
+          <mxGeometry height="70" width="140" x="310" y="310" as="geometry" />
         </mxCell>
-        <mxCell id="Hxwv0aaDRKQmVLQrkZwk-3" value="ф. string_memory_&lt;div&gt;_allocate выдзяляе памяць пад радок.&lt;/div&gt;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
-          <mxGeometry x="310" y="400" width="140" height="70" as="geometry" />
+        <mxCell id="Hxwv0aaDRKQmVLQrkZwk-3" parent="1" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" value="ф. string_memory_&lt;div&gt;_allocate() выдзяляе памяць пад радок.&lt;/div&gt;" vertex="1">
+          <mxGeometry height="70" width="140" x="310" y="400" as="geometry" />
         </mxCell>
-        <mxCell id="Hxwv0aaDRKQmVLQrkZwk-5" value="Вывад апрацаванага радку string на экран.&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="310" y="740" width="140" height="72" as="geometry" />
+        <mxCell id="Hxwv0aaDRKQmVLQrkZwk-5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Вывад апрацаванага радку string на экран.&amp;nbsp;" vertex="1">
+          <mxGeometry height="72" width="140" x="310" y="740" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
