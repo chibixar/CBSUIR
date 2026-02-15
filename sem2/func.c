@@ -13,3 +13,9 @@ void GetInt(int *value) {                                                  //Ñ„Ñ
         }
     }
 }
+
+void rewind_linux(void)
+{
+    int c;
+    while((c=getchar()) != '\n' && c != EOF);
+}

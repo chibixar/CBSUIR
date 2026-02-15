@@ -6,5 +6,5 @@
 #define MAX_MATERIAL_LENGTH 10
 
 void GetInt(int *value);
-
+void rewind_linux(void);
 #endif
