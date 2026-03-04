@@ -127,6 +127,32 @@ void output_Child(Child *children, int number_of_children)
     printf("\n");
 }
 
+int compare_by_surname(const void *a, const void *b) {
+    return strcmp(((const Child *)a)->surname, ((const Child *)b)->surname);
+}
+
+children_analysis(Child *children, int number_of_children, Child **result, int *result_count, const char *target_illness)
+{
+    *result_count = 0;
+    *result = malloc(number_of_children * sizeof(Child));
+    for (int i = 0; i < number_of_children; i++)
+    {
+        char *ill = children[i].was_hospitalized
+            ? children[i].health_information.hospital.illness
+            : children[i].health_information.local.illness;
+        if (strcmp(ill, target_illness) == 0) 
+            (*result)[*result_count++] = children[i];  
+    }
+    Child *tmp = realloc(*result, *result_count * sizeof(Child));
+    if (!tmp) 
+    {
+        free(*result);
+        exit(1);
+    }
+    *result = tmp;
+    if (!*(result)) exit(1);
+    qsort(*result, *result_count, sizeof(Child), compare_by_surname);
+}
 
 
 void rewind_linux(void)
