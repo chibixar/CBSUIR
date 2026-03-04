@@ -142,12 +142,12 @@ void children_analysis(Child *children, int number_of_children, Child **result, 
         (*result)[(*result_count)++] = children[i];                                                // Дадаванне дзіцяці ў масіў вынікаў і павелічэнне лічыльніка.
     }
     if (*result_count == 0)
-{
+    {
     free(*result);                                                                                  // Вызваленне памяці пры адсутнасці вынікаў.
     *result = NULL;                                                                                 // Абнуленне паказальніка пры пустым выніку.
     return;
-}
-Child *tmp = realloc(*result, *result_count * sizeof(Child));                                       // Змяншэнне памяці масіву да фактычнага памеру.
+    }
+    Child *tmp = realloc(*result, *result_count * sizeof(Child));                                       // Змяншэнне памяці масіву да фактычнага памеру.
     if (!tmp) 
     {
         free(*result);                                                                              // Вызваленне памяці пры памылцы realloc.

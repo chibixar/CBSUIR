@@ -15,7 +15,7 @@ int main()
     printf("Enter the target illness:\n");
     fgets(target_illness, MAX_ALLOWED, stdin);                                                                           // Счытванне назвы мэтавай хваробы.
     target_illness[strcspn(target_illness, "\n")] = '\0';                                                                // Выдаленне сімвала новага радка пасля fgets.
-    children_analysis(children, number_of_children, &children_with_target_illness, &result_count, target_illness);      // Аналіз і фільтрацыя дзяцей па мэтавай хваробе.
+    children_analysis(children, number_of_children, &children_with_target_illness, &result_count, target_illness);       // Аналіз і фільтрацыя дзяцей па мэтавай хваробе.
     output_children_with_target_illness(children_with_target_illness, result_count);                                     // Вывад дзяцей з мэтавай хваробай.
     
     free(children);                                                                                                      // Вызваленне памяці першага масіву.
