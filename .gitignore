@@ -21,3 +21,9 @@
 #Debug
 *.dSYM/
 *.pdb
+
+#Linux tmp files
+*~
+*.swp
+*.tmp
+.~lock.*#
