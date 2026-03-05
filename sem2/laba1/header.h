@@ -31,6 +31,7 @@ void memory_allocation_Cubes(struct Cube **cubes, int number_of_cubes);         
 void color_input(char *color, char allowed_colors[][MAX_COLOR_LENGTH]);                                                                              // Аб'ява функцыі ўводу колеру.
 void material_input(char *material, char allowed_materials[][MAX_MATERIAL_LENGTH]);                                                                  // Аб'ява функцыі ўводу матэрыялу.
 void input_Cubes(struct Cube **cubes, int *number_of_cubes, char allowed_colors[][MAX_COLOR_LENGTH], char allowed_materials[][MAX_MATERIAL_LENGTH]); // Аб'ява функцыі ўводу ўсіх кубікаў.
+void print_cubes_table(struct Cube *cubes, int number_of_cubes);
 void analyze_by_color(struct Cube *cubes, int number_of_cubes, char allowed_colors[][MAX_COLOR_LENGTH], struct ColorAnalysis *results);              // Аб'ява функцыі аналізу па колеры.
 void analyze_by_material_and_size(struct Cube *cubes, int number_of_cubes, int n, int m, struct MaterialSizeAnalysis *result);                       // Аб'ява функцыі аналізу па матэрыяле і памеры.
 void output_color_analysis(char allowed_colors[][MAX_COLOR_LENGTH], struct ColorAnalysis *results);                                                  // Аб'ява функцыі вываду аналізу па колеры.

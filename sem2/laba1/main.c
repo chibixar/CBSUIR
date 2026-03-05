@@ -13,6 +13,7 @@ int main(void)
     char allowed_materials[NUMBER_OF_ALLOWED_MATERIALS][MAX_MATERIAL_LENGTH] = {"Wood", "Metal", "Cardboard"}; // Масіў дазволеных матэрыялаў.
     struct Cube *cubes;                                                                                         // Указальнік на дынамічны масіў кубікаў.
     input_Cubes(&cubes, &number_of_cubes, allowed_colors, allowed_materials);                                   // Увод дадзеных пра кубікі ад карыстальніка.
+    print_cubes_table(cubes, number_of_cubes);
     struct ColorAnalysis color_results[NUMBER_OF_ALLOWED_COLORS];                                               // Масіў вынікаў аналізу па колеры.
     analyze_by_color(cubes, number_of_cubes, allowed_colors, color_results);                                    // Аналіз кубікаў па колеры.
     output_color_analysis(allowed_colors, color_results);                                                       // Вывад выніку аналізу па колеры.

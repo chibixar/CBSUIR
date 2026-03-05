@@ -74,6 +74,22 @@ void input_Cubes (struct Cube **cubes, int *number_of_cubes, char allowed_colors
     }
 }
 
+void print_cubes_table(struct Cube *cubes, int number_of_cubes)
+{
+    printf("\n=== Entered Cubes ===\n");
+    printf("%-5s %-8s %-10s %-12s\n", "No.", "Size", "Color", "Material");
+    printf("-------------------------------------\n");
+
+    for (int i = 0; i < number_of_cubes; i++)
+    {
+        printf("%-5d %-8d %-10s %-12s\n",
+               i + 1,
+               cubes[i].size,
+               cubes[i].color,
+               cubes[i].material);
+    }
+}
+
 void analyze_by_color(struct Cube *cubes, int number_of_cubes, char allowed_colors[][MAX_COLOR_LENGTH], struct ColorAnalysis *results)
 {
     for (int i = 0; i < NUMBER_OF_ALLOWED_COLORS; i++)
