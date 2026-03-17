@@ -1,0 +1,8 @@
+No.   First Name           Surname              Age   Hosp  Illness              Doctor               Address/Hospital#   
+1     Ilya                 Shved                10    yes   flu                  Petrov               Main St              #3
+2     Kirill               Nikitin              8     no    flu                  Sidorov              -                   
+3     Fedor                Rolevich             12    yes   flu                  Kovalev              Lenin Ave            #7
+4     Anna                 Ivanova              9     no    cold                 Petrov               -                   
+5     Max                  Kozlov               11    yes   flu                  Sokolov              Park Rd              #2
+6     Sofia                Belova               7     no    angina               Morozov              -                   
+7     Denis                Volkov               13    yes   cold                 Lebedev              Oak St               #5
