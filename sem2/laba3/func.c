@@ -28,6 +28,20 @@ void memory_allocation_Child(Child **children,int number_of_children)
     }
 }
 
+void get_input_file_name(char *filename)
+{
+    printf("Enter file name to read:\n");
+    fgets(filename,MAX_FILENAME,stdin);
+    filename[strcspn(filename,"\n")] = 0;
+}
+
+void get_output_file_name(char *filename)
+{
+    printf("Enter file name to save table:\n");
+    fgets(filename,100,stdin);
+    filename[strcspn(filename,"\n")] = 0;
+}
+
 void read_children_from_file(const char *filename, Child **children, int *count)
 {
     FILE *f = fopen(filename, "r");
@@ -80,10 +94,10 @@ void read_children_from_file(const char *filename, Child **children, int *count)
     fclose(f);
 }
 
-void write_children_to_file(const char *filename, Child *children, int count)
+void write_children_to_file(const char *filename, Child *children, int count, const char *mode)
 {
-    FILE *f = fopen(filename, "w");
-    if (!f)
+    FILE *f = fopen(filename, mode);
+    if (!f)                                                                                                                                                                  
     {
         printf("Error opening file for writing.\n");
         return;
@@ -122,7 +136,7 @@ void write_children_to_file(const char *filename, Child *children, int count)
                     "-");
         }
     }
-
+    fprintf(f, "\n\n");
     fclose(f);
 }
 
@@ -198,14 +212,7 @@ void children_analysis(Child *children, int number_of_children, Child **result, 
     }
     *result = tmp;                                                                                  // Прысваенне новага паказальніка пасля realloc.
     qsort(*result, *result_count, sizeof(Child), compare_by_surname);                              // Сартаванне вынікаў па прозвішчы.
-}
 
-void output_children_with_target_illness(Child *children_with_target_illness, int result_count)
-{
-    if (!children_with_target_illness || result_count == 0) { printf("\nNo children found with that illness.\n"); return; } // Выхад з функцыі пры адсутнасці вынікаў.
-    printf("\n===== Children with target illness (alphabetical by surname) =====\n");
-    for (int i = 0; i < result_count; i++)
-        printf("%d. %s %s\n", i+1, children_with_target_illness[i].surname, children_with_target_illness[i].first_name); // Вывад прозвішча і імя дзіцяці.
 }
 
 void rewind_linux(void)
