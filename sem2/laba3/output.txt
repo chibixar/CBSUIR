@@ -1,4 +1,3 @@
-No.   First Name           Surname              Age   Hosp  Illness              Doctor               Address/Hospital#   
 1     Ilya                 Shved                10    yes   flu                  Petrov               Main St              #3
 2     Kirill               Nikitin              8     no    flu                  Sidorov              -                   
 3     Fedor                Rolevich             12    yes   flu                  Kovalev              Lenin Ave            #7
@@ -8,7 +7,6 @@ No.   First Name           Surname              Age   Hosp  Illness             
 7     Denis                Volkov               13    yes   cold                 Lebedev              Oak St               #5
 
 
-No.   First Name           Surname              Age   Hosp  Illness              Doctor               Address/Hospital#   
 1     Max                  Kozlov               11    yes   flu                  Sokolov              Park Rd              #2
 2     Kirill               Nikitin              8     no    flu                  Sidorov              -                   
 3     Fedor                Rolevich             12    yes   flu                  Kovalev              Lenin Ave            #7

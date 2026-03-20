@@ -12,12 +12,11 @@ int main()
     Child *children_with_target_illness = NULL;                                                                          // Указальнік на масіў адфільтраваных дзяцей.
     input_Child(&children, &number_of_children);                                                                         // Увод дадзеных пра ўсіх дзяцей.
     output_Child(children, number_of_children);                                                                          // Вывад табліцы ўсіх дзяцей.
-    printf("Enter the target illness:\n");
-    fgets(target_illness, MAX_ALLOWED, stdin);                                                                           // Счытванне назвы мэтавай хваробы.
-    target_illness[strcspn(target_illness, "\n")] = '\0';                                                                // Выдаленне сімвала новага радка пасля fgets.
+    get_target_illness(target_illness);
     children_analysis(children, number_of_children, &children_with_target_illness, &result_count, target_illness);       // Аналіз і фільтрацыя дзяцей па мэтавай хваробе.
-    output_children_with_target_illness(children_with_target_illness, result_count);                                     // Вывад дзяцей з мэтавай хваробай.
-    
+    if(!result_count) return 1;
+    // output_children_with_target_illness(children_with_target_illness, result_count);                                     
+    output_Child(children_with_target_illness, result_count);
     free(children);                                                                                                      // Вызваленне памяці першага масіву.
     free(children_with_target_illness);                                                                                  // Вызваленне памяці другога масіву.
 

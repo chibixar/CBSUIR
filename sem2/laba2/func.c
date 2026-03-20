@@ -129,8 +129,16 @@ int compare_by_surname(const void *a, const void *b) {
     return strcmp(((const Child *)a)->surname, ((const Child *)b)->surname); // Параўнанне двух дзяцей па прозвішчы для сартавання.
 }
 
-void children_analysis(Child *children, int number_of_children, Child **result, int *result_count, const char *target_illness)
+void get_target_illness(char *target_illness)
 {
+    printf("Enter the target illness:\n");
+    fgets(target_illness, MAX_ALLOWED, stdin);                                                                           // Счытванне назвы мэтавай хваробы.
+    target_illness[strcspn(target_illness, "\n")] = '\0';                                                                // Выдаленне сімвала новага радка пасля fgets.
+}
+
+void children_analysis(Child *children, int number_of_children, Child **result, int *result_count,  char *target_illness)
+{
+    puts(target_illness);
     *result_count = 0;                                                                              // Скід лічыльніка вынікаў.
     *result = malloc(number_of_children * sizeof(Child));                                           // Выдзяленне максімальна магчымай памяці пад вынік.
     for (int i = 0; i < number_of_children; i++)
@@ -147,13 +155,15 @@ void children_analysis(Child *children, int number_of_children, Child **result, 
     *result = NULL;                                                                                 // Абнуленне паказальніка пры пустым выніку.
     return;
     }
-    Child *tmp = realloc(*result, *result_count * sizeof(Child));                                       // Змяншэнне памяці масіву да фактычнага памеру.
-    if (!tmp) 
-    {
-        free(*result);                                                                              // Вызваленне памяці пры памылцы realloc.
-        exit(1);                                                                                    // Завяршэнне праграмы пры памылцы перавыдзялення памяці.
-    }
-    *result = tmp;                                                                                  // Прысваенне новага паказальніка пасля realloc.
+    // Child *tmp = realloc(*result, *result_count * sizeof(Child));                                       // Змяншэнне памяці масіву да фактычнага памеру.
+    // if (!tmp) 
+    // {
+    //     free(*result);                                                                              // Вызваленне памяці пры памылцы realloc.
+    //     exit(1);                                                                                    // Завяршэнне праграмы пры памылцы перавыдзялення памяці.
+    // }
+    Child *result = realloc(*result, *result_count * sizeof(Child));                                       // Змяншэнне памяці масіву да фактычнага памеру.
+    
+    // *result = tmp;                                                                                  // Прысваенне новага паказальніка пасля realloc.
     qsort(*result, *result_count, sizeof(Child), compare_by_surname);                              // Сартаванне вынікаў па прозвішчы.
 }
 

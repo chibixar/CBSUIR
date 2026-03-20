@@ -103,8 +103,8 @@ void write_children_to_file(const char *filename, Child *children, int count, co
         return;
     }
 
-    fprintf(f,"%-5s %-20s %-20s %-5s %-5s %-20s %-20s %-20s\n",
-           "No.", "First Name", "Surname", "Age", "Hosp", "Illness", "Doctor", "Address/Hospital#");
+    // fprintf(f,"%-5s %-20s %-20s %-5s %-5s %-20s %-20s %-20s\n",
+    //        "No.", "First Name", "Surname", "Age", "Hosp", "Illness", "Doctor", "Address/Hospital#");
 
     for (int i = 0; i < count; i++)
     {
