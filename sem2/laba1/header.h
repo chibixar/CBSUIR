@@ -37,4 +37,5 @@ void analyze_by_material_and_size(struct Cube *cubes, int number_of_cubes, int n
 void output_color_analysis(char allowed_colors[][MAX_COLOR_LENGTH], struct ColorAnalysis *results);                                                  // Аб'ява функцыі вываду аналізу па колеры.
 void output_material_size_analysis(struct MaterialSizeAnalysis *result);                                                                             // Аб'ява функцыі вываду аналізу па матэрыяле.
 void GetInt(int *value);                                                                                                                             // Аб'ява функцыі бяспечнага ўводу цэлага ліку.
+// void print_cubes_table(struct Cube *cubes, int number_of_cubes);
 #endif 

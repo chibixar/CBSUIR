@@ -8,11 +8,11 @@ void GetInt(int *value) {
     while(1)
     {                                                      
         if (scanf("%d", value) == 1) {                             // Праверка, ці ўдалося счытаць цэлы лік.
-            fflush(stdin);                                         // Ачыстка буфера ўводу пасля паспяховага счытвання.
+            rewind_linux();                                         // Ачыстка буфера ўводу пасля паспяховага счытвання.
             return;
         } else {
             printf("Invalid input. Please enter an integer.\n");   // Паведамленне пра памылку ўводу.
-            fflush(stdin);                                         // Ачыстка буфера пасля некарэктнага ўводу.
+            rewind_linux();                                         // Ачыстка буфера ўводу пасля паспяховага счытвання.
         }
     }
 }
@@ -148,8 +148,206 @@ void output_material_size_analysis(struct MaterialSizeAnalysis *result)
     else printf("No metal cubes with edge > %d cm\n", result->m);                                                                           // Вывад паведамлення пра адсутнасць металічных кубікаў.
 }
 
-void rewind_linux(void)
-{
-    int c;
-    while((c=getchar()) != '\n' && c != EOF); // Чытанне сімвалаў да канца радка або канца файла.
-}
+// void print_cubes_table(struct Cube *cubes, int number_of_cubes)
+// {
+//     printf("\n=== Cubes Table ===\n");
+
+//     // Table header
+//     printf("-----------------------------------\n");
+//     printf("| %-3s | %-6s | %-8s | %-10s |\n", "No", "Size", "Color", "Material");
+//     printf("-----------------------------------\n");
+
+//     // Table rows
+//     for (int i = 0; i < number_of_cubes; i++)
+//     {
+//         printf("| %-3d | %-6d | %-8s | %-10s |\n",
+//                i + 1,
+//                cubes[i].size,
+//                cubes[i].color,
+//                cubes[i].material);
+//     }
+//     printf("-----------------------------------\n");
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

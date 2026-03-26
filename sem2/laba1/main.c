@@ -21,6 +21,7 @@ int main(void)
     GetInt(&n);                                                                                                 // Увод даўжыні рабра n для драўляных кубікаў.
     printf("Enter edge length m (for metal cubes > m): ");                                                      // Запыт парогавага значэння m.
     GetInt(&m);                                                                                                 // Увод парогавага значэння m для металічных кубікаў.
+    print_cubes_table(cubes, number_of_cubes);
     struct MaterialSizeAnalysis material_result;                                                                 // Структура для захавання выніку аналізу па матэрыяле.
     analyze_by_material_and_size(cubes, number_of_cubes, n, m, &material_result);                               // Аналіз кубікаў па матэрыяле і памеры.
     output_material_size_analysis(&material_result);                                                            // Вывад выніку аналізу па матэрыяле.
