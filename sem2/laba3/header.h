@@ -32,8 +32,9 @@ typedef struct
     
 } Child;
 
-void rewind_linux(void);                                                                                                                             // Аб'ява функцыі ачысткі буфера ўводу.
+void read_line(char *buffer, int size, FILE *f);
 void GetInt(int *value);                                                                                                                             // Аб'ява функцыі бяспечнага ўводу цэлага ліку.
+void rewind_linux(void);                                                                                                                             // Аб'ява функцыі ачысткі буфера ўводу.
 void get_input_file_name(char *filename);
 void get_output_file_name(char *filename);
 void memory_allocation_Child(Child **children, int number_of_children);                                                                              // Аб'ява функцыі выдзялення памяці пад масіў дзяцей.

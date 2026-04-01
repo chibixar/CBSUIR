@@ -54,44 +54,39 @@ void read_children_from_file(const char *filename, Child **children, int *count)
     fscanf(f,"%d\n",count);
 
     *children = malloc((*count) * sizeof(Child));
-
     for (int i = 0; i < *count; i++)
     {
         Child *c = &(*children)[i];
 
-        fgets(c->first_name, MAX_ALLOWED, f);
-        c->first_name[strcspn(c->first_name,"\n")] = 0;
-
-        fgets(c->surname, MAX_ALLOWED, f);
-        c->surname[strcspn(c->surname,"\n")] = 0;
+        read_line(c->first_name, MAX_ALLOWED, f);
+        read_line(c->surname, MAX_ALLOWED, f);
 
         fscanf(f,"%d\n",&c->age);
         fscanf(f,"%d\n",&c->was_hospitalized);
 
         if (c->was_hospitalized)
         {
-            fgets(c->health_information.hospital.illness, MAX_ALLOWED, f);
-            c->health_information.hospital.illness[strcspn(c->health_information.hospital.illness,"\n")] = 0;
-
-            fgets(c->health_information.hospital.attending_doctor, MAX_ALLOWED, f);
-            c->health_information.hospital.attending_doctor[strcspn(c->health_information.hospital.attending_doctor,"\n")] = 0;
-
-            fgets(c->health_information.hospital.adress, MAX_ALLOWED, f);
-            c->health_information.hospital.adress[strcspn(c->health_information.hospital.adress,"\n")] = 0;
+            read_line(c->health_information.hospital.illness, MAX_ALLOWED, f);
+            read_line(c->health_information.hospital.attending_doctor, MAX_ALLOWED, f);
+            read_line(c->health_information.hospital.adress, MAX_ALLOWED, f);
 
             fscanf(f,"%d\n",&c->health_information.hospital.hospital_number);
         }
         else
         {
-            fgets(c->health_information.local.illness, MAX_ALLOWED, f);
-            c->health_information.local.illness[strcspn(c->health_information.local.illness,"\n")] = 0;
-
-            fgets(c->health_information.local.local_doctor, MAX_ALLOWED, f);
-            c->health_information.local.local_doctor[strcspn(c->health_information.local.local_doctor,"\n")] = 0;
+            read_line(c->health_information.local.illness, MAX_ALLOWED, f);
+            read_line(c->health_information.local.local_doctor, MAX_ALLOWED, f);
         }
     }
-
     fclose(f);
+}
+
+void read_line(char *buffer, int size, FILE *f)
+{
+    if (fgets(buffer, size, f) != NULL)
+    {
+        buffer[strcspn(buffer, "\n")] = '\0';  // remove '\n'
+    }
 }
 
 void write_children_to_file(const char *filename, Child *children, int count, const char *mode)
