@@ -1,8 +1,8 @@
 #include "header.h"
 
-void push(struct Stack** top, char c)                          //Дадаць новы элемент на вяршыню стэка.
+void push(Stack** top, char c)                                 //Дадаць новы элемент на вяршыню стэка.
 {
-    struct Stack* node = malloc(sizeof(struct Stack));         //Вылучаем памяць для новага вузла.
+    Stack* node = malloc(sizeof(Stack));                       //Вылучаем памяць для новага вузла.
     if (node == NULL) {                                        //Памяць не вылучана — крытычная памылка.
         fprintf(stderr, "Fatal: out of memory\n");
         exit(EXIT_FAILURE);
@@ -12,21 +12,21 @@ void push(struct Stack** top, char c)                          //Дадаць н
     *top = node;                                               //Абнаўляем указальнік на вяршыню стэка.
 }
 
-char pop(struct Stack** top)                                   //Здыць і вярнуць элемент з вяршыні стэка.
+char pop(Stack** top)                                          //Здыць і вярнуць элемент з вяршыні стэка.
 {
     if (*top == NULL) return '\0';                             //Стэк пусты — вяртаем пусты сімвал.
 
-    struct Stack* tmp = *top;                                  //Захоўваем указальнік на выдаляемы вузел.
-    char val = tmp->data;                                      //Запамінаем значэнне перад выдаленнем.
+    Stack* tmp = *top;                                         //Захоўваем указальнік на выдаляемы вузел.
+    char          val = tmp->data;                             //Запамінаем значэнне перад выдаленнем.
     *top = tmp->next;                                          //Перасоўваем вяршыню на наступны элемент.
     free(tmp);                                                 //Вызваляем памяць выдаленага вузла.
     return val;
 }
 
-void printStack(struct Stack* top)                             //Вывесці змест стэка (выклікаецца калі стэк непусты).
+void printStack(Stack* top)                                    //Вывесці змест стэка (выклікаецца калі стэк непусты).
 {
     printf("  Remaining in stack: [ ");
-    struct Stack* cur = top;                                   //Абыходзім стэк не мяняючы яго.
+    Stack* cur = top;                                          //Абыходзім стэк не мяняючы яго.
     while (cur != NULL) {
         printf("'%c' ", cur->data);                            //Выводзім кожны элемент ад вяршыні да дна.
         cur = cur->next;
@@ -34,10 +34,10 @@ void printStack(struct Stack* top)                             //Вывесці 
     printf("]\n");
 }
 
-void clearStack(struct Stack** top)                            //Ачысціць увесь стэк і вызваліць памяць.
+void clearStack(Stack** top)                                   //Ачысціць увесь стэк і вызваліць памяць.
 {
     while (*top != NULL) {                                     //Выдаляем элементы пакуль стэк не стане пустым.
-        struct Stack* tmp = *top;
+        Stack* tmp = *top;
         *top = tmp->next;
         free(tmp);                                             //Вызваляем кожны вузел паасобку.
     }
@@ -151,7 +151,7 @@ int chooseInputMethod(void)                                    //Паказац�
 
 int checkBrackets(const char* expr)                            //Праверыць правільнасць дужак праз стэк, вярнуць 1 або 0.
 {
-    struct Stack* top    = NULL;                               //Стэк для захавання адкрываючых дужак.
+    Stack* top    = NULL;                                      //Стэк для захавання адкрываючых дужак.
     int           result = 1;                                  //Вынік праверкі: 1 — правільна, 0 — памылка.
     int           len    = (int)strlen(expr);
 

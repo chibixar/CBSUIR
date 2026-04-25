@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 900" width="100%" height="100%">
+    <style>
+        rect, polygon, path, line { fill: none; stroke: black; stroke-width: 1.5; }
+        text { font-family: Arial, sans-serif; font-size: 15px; text-anchor: middle; dominant-baseline: central; fill: black; stroke: none; }
+        .bg { fill: white; stroke: none; }
+    </style>
+    <rect class="bg" width="620" height="900"/>
+
+    <defs>
+        <!-- Маркер стрелки (теперь жестко задан черный цвет заливки через style) -->
+        <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+            <path d="M 0,0 L 10,5 L 0,10 Z" style="fill: black; stroke: none;" />
+        </marker>
+
+        <!-- "ПЕРЕМЕННЫЕ" ФИГУР (центрированы по X=0, Y=0) -->
+        
+        <!-- 1. Терминал (Начало/Конец): ширина 160, высота 40 -->
+        <rect id="term" x="-80" y="-20" width="160" height="40" rx="20" ry="20" />
+        
+        <!-- 2. Подпрограмма: ширина 160, высота 80 -->
+        <g id="proc">
+            <rect x="-80" y="-40" width="160" height="80" />
+            <line x1="-65" x2="-65" y1="-40" y2="40" />
+            <line x1="65" x2="65" y1="-40" y2="40" />
+        </g>
+        
+        <!-- 3. Ромб (условие): ширина 160, высота 80 -->
+        <polygon id="rhomb" points="0,-40 80,0 0,40 -80,0" />
+        
+        <!-- 4. Параллелограмм (ввод/вывод): ширина 160, высота 80 -->
+        <polygon id="io" points="-60,-40 80,-40 60,40 -80,40" />
+    </defs>
+
+    <!-- ==================== БЛОКИ ==================== -->
+    
+    <g transform="translate(300, 60)">
+        <use href="#term" />
+        <text>Начало</text>
+    </g>
+
+    <g transform="translate(300, 180)">
+        <use href="#proc" />
+        <text y="-10">выклік ф.</text>
+        <text y="15">showMenu()</text>
+    </g>
+
+    <g transform="translate(300, 300)">
+        <use href="#proc" />
+        <text y="-20">choice =</text>
+        <text y="0">выклік ф.</text>
+        <text y="20">getMenuChoice()</text>
+    </g>
+
+    <g transform="translate(300, 420)">
+        <use href="#rhomb" />
+        <text>choice</text>
+    </g>
+
+    <!-- Три ветви -->
+    <g transform="translate(100, 540)">
+        <use href="#proc" />
+        <text y="-10">выклік ф.</text>
+        <text y="15">handleCheck()</text>
+    </g>
+
+    <g transform="translate(300, 540)">
+        <use href="#io" />
+        <text y="-10">Вывад:</text>
+        <text y="15">"Goodbye!"</text>
+    </g>
+
+    <g transform="translate(500, 540)">
+        <use href="#io" />
+        <text y="-20">Вывад:</text>
+        <text y="0">"Unknown</text>
+        <text y="20">option..."</text>
+    </g>
+
+    <g transform="translate(300, 700)">
+        <use href="#rhomb" />
+        <text>choice != 2</text>
+    </g>
+
+    <g transform="translate(300, 820)">
+        <use href="#term" />
+        <text>Конец</text>
+    </g>
+
+    <!-- Текстовые метки условий -->
+    <text x="160" y="410">1</text>
+    <text x="315" y="475">2</text>
+    <text x="440" y="410">інакш</text>
+    <text x="180" y="690">да</text>
+    <text x="320" y="760">нет</text>
+
+    <!-- ==================== СТРЕЛКИ ==================== -->
+    
+    <line x1="300" y1="80" x2="300" y2="135" marker-end="url(#arrow)"/>
+    <line x1="300" y1="220" x2="300" y2="255" marker-end="url(#arrow)"/>
+    <line x1="300" y1="340" x2="300" y2="375" marker-end="url(#arrow)"/>
+
+    <!-- Разветвление -->
+    <path d="M 220,420 L 100,420 L 100,495" marker-end="url(#arrow)"/>
+    <line x1="300" y1="460" x2="300" y2="495" marker-end="url(#arrow)"/>
+    <path d="M 380,420 L 500,420 L 500,495" marker-end="url(#arrow)"/>
+
+    <!-- Сборка -->
+    <path d="M 100,580 L 100,620 L 300,620"/>
+    <path d="M 500,580 L 500,620 L 300,620"/>
+    <line x1="300" y1="580" x2="300" y2="620"/>
+    
+    <!-- К условию цикла -->
+    <line x1="300" y1="620" x2="300" y2="655" marker-end="url(#arrow)"/>
+
+    <!-- Возврат цикла (выходит влево, идёт вверх и соединяется сбоку с вертикальной линией) -->
+    <path d="M 220,700 L 10,700 L 10,120 L 290,120" marker-end="url(#arrow)"/>
+
+    <!-- Конец -->
+    <line x1="300" y1="740" x2="300" y2="795" marker-end="url(#arrow)"/>
+</svg>
