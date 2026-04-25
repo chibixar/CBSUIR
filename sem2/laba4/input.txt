@@ -1,0 +1,7 @@
+Ilya                 Shved                10    yes   flu                  Petrov               Main_St              #3
+Kirill               Nikitin              8     no    flu                  Sidorov              -                   
+Fedor                Rolevich             12    yes   flu                  Kovalev              Lenin_Ave            #7
+Anna                 Ivanova              9     no    cold                 Petrov               -                   
+Max                  Kozlov               11    yes   flu                  Sokolov              Park_Rd              #2
+Sofia                Belova               7     no    angina               Morozov              -                   
+Denis                Volkov               13    yes   cold                 Lebedev              Oak_St               #5
