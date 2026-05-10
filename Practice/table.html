@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="be">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: "Times New Roman", serif;
+            font-size: 14pt;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 5px 8px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            font-weight: bold;
+            text-align: center;
+        }
+        h3 {
+            font-size: 14pt;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h3>Табліца 1 – Структура DateTime (Захоўванне часу і даты)</h3>
+    <table>
+        <tr>
+            <th>Назва поля</th>
+            <th>Тып дадзеных</th>
+            <th>Апісанне</th>
+        </tr>
+        <tr><td>day</td><td>int</td><td>Дзень</td></tr>
+        <tr><td>month</td><td>int</td><td>Месяц</td></tr>
+        <tr><td>year</td><td>int</td><td>Год</td></tr>
+        <tr><td>hour</td><td>int</td><td>Гадзіны</td></tr>
+        <tr><td>minute</td><td>int</td><td>Хвіліны</td></tr>
+    </table>
+
+    <h3>Табліца 2 – Структура Flight (Апісанне аднаго рэйса)</h3>
+    <table>
+        <tr>
+            <th>Назва поля</th>
+            <th>Тып дадзеных</th>
+            <th>Апісанне</th>
+        </tr>
+        <tr><td>flightNumber</td><td>char[10]</td><td>Нумар, напрыклад "B2-737"</td></tr>
+        <tr><td>airline</td><td>char[50]</td><td>Авіякампанія</td></tr>
+        <tr><td>city</td><td>char[50]</td><td>Куды ляціць або адкуль прылятае</td></tr>
+        <tr><td>airplaneModel</td><td>char[30]</td><td>Мадэль самалёта</td></tr>
+        <tr><td>type</td><td>FlightType</td><td>Прылёт або вылет</td></tr>
+        <tr><td>scheduleTime</td><td>DateTime</td><td>Час па плане</td></tr>
+        <tr><td>actualTime</td><td>DateTime</td><td>Рэальны час (важна пры затрымцы)</td></tr>
+        <tr><td>status</td><td>FlightStatus</td><td>Бягучы стан рэйса</td></tr>
+        <tr><td>terminal</td><td>char</td><td>Літара тэрмінала (A, B, C...)</td></tr>
+        <tr><td>gate</td><td>int</td><td>Нумар гейта для пасадкі</td></tr>
+    </table>
+
+    <h3>Табліца 3 – Структура AirportSystem (База дадзеных маіх рэйсаў)</h3>
+    <table>
+        <tr>
+            <th>Назва поля</th>
+            <th>Тып дадзеных</th>
+            <th>Апісанне</th>
+        </tr>
+        <tr><td>flights</td><td>Flight*</td><td>Указальнік на масіў у памяці</td></tr>
+        <tr><td>count</td><td>int</td><td>Колькі рэйсаў рэальна запісана зараз</td></tr>
+        <tr><td>capacity</td><td>int</td><td>На колькі месцаў выдзелена памяць</td></tr>
+    </table>
+
+    <h3>Табліца 4 – Структура SearchFilter (Параметры для пошуку)</h3>
+    <table>
+        <tr>
+            <th>Назва поля</th>
+            <th>Тып дадзеных</th>
+            <th>Апісанне</th>
+        </tr>
+        <tr><td>useTypeFilter</td><td>Boolean</td><td>Ці шукаю па канкрэтным напрамку</td></tr>
+        <tr><td>targetType</td><td>FlightType</td><td>Сам напрамак (прылёт/вылет)</td></tr>
+        <tr><td>useCityFilter</td><td>Boolean</td><td>Ці шукаю па горадзе</td></tr>
+        <tr><td>targetCity</td><td>char[50]</td><td>Назва горада для пошуку</td></tr>
+        <tr><td>useStatusFilter</td><td>Boolean</td><td>Ці шукаю па статусе</td></tr>
+        <tr><td>targetStatus</td><td>FlightStatus</td><td>Сам статус (напрыклад, затрымліваюцца)</td></tr>
+        <tr><td>useTimeFilter</td><td>Boolean</td><td>Ці шукаю па часе</td></tr>
+        <tr><td>startTime</td><td>DateTime</td><td>Шукаю рэйсы толькі пасля гэтага часу</td></tr>
+    </table>
+
+    <h3>Табліца 5 – Структура User (Дадзеныя карыстальніка для аўтарызацыі)</h3>
+    <table>
+        <tr>
+            <th>Назва поля</th>
+            <th>Тып дадзеных</th>
+            <th>Апісанне</th>
+        </tr>
+        <tr><td>username</td><td>char[30]</td><td>Логін карыстальніка</td></tr>
+        <tr><td>password</td><td>char[30]</td><td>Пароль (у курсавой захоўваецца радком)</td></tr>
+        <tr><td>role</td><td>UserRole</td><td>Узровень доступу</td></tr>
+    </table>
+
+    <br>
+    <p><i>Дадаткова: Табліцы для пералікаў (enum), калі яны спатрэбяцца ў тлумачальнай запісцы:</i></p>
+
+    <h3>Табліца 6 – Пералік FlightStatus (Магчымыя станы рэйса)</h3>
+    <table>
+        <tr>
+            <th>Канстанта</th>
+            <th>Лікавае значэнне</th>
+            <th>Апісанне</th>
+        </tr>
+        <tr><td>ON_TIME</td><td>0</td><td>Па раскладзе</td></tr>
+        <tr><td>DELAYED</td><td>1</td><td>Спазняецца</td></tr>
+        <tr><td>BOARDING</td><td>2</td><td>Пасадка (калі гэта вылет)</td></tr>
+        <tr><td>DEPARTED</td><td>3</td><td>Ужо вылецеў</td></tr>
+        <tr><td>LANDED</td><td>4</td><td>Ужо прызямліўся</td></tr>
+        <tr><td>CANCELED</td><td>5</td><td>Адменены</td></tr>
+    </table>
+
+    <h3>Табліца 7 – Пералік UserRole (Ролі) і FlightType (Напрамкі)</h3>
+    <table>
+        <tr>
+            <th>Тып enum</th>
+            <th>Канстанта</th>
+            <th>Апісанне</th>
+        </tr>
+        <tr><td rowspan="2">UserRole</td><td>ROLE_PASSENGER</td><td>Можа толькі глядзець табло і шукаць</td></tr>
+        <tr><td>ROLE_ADMIN</td><td>Можа дадаваць, рэдагаваць і выдаляць</td></tr>
+        <tr><td rowspan="2">FlightType</td><td>ARRIVAL</td><td>Прылёт</td></tr>
+        <tr><td>DEPARTURE</td><td>Вылет</td></tr>
+    </table>
+
+</body>
+</html>

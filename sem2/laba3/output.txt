@@ -1,15 +1,15 @@
-1     Ilya                 Shved                10    yes   flu                  Petrov               Main St              #3
-2     Kirill               Nikitin              8     no    flu                  Sidorov              -                   
-3     Fedor                Rolevich             12    yes   flu                  Kovalev              Lenin Ave            #7
-4     Anna                 Ivanova              9     no    cold                 Petrov               -                   
-5     Max                  Kozlov               11    yes   flu                  Sokolov              Park Rd              #2
-6     Sofia                Belova               7     no    angina               Morozov              -                   
-7     Denis                Volkov               13    yes   cold                 Lebedev              Oak St               #5
+Ilya                 Shved                10    yes   flu                  Petrov               Main_St              #3
+Kirill               Nikitin              8     no    flu                  Sidorov              -                   
+Fedor                Rolevich             12    yes   flu                  Kovalev              Lenin_Ave            #7
+Anna                 Ivanova              9     no    cold                 Petrov               -                   
+Max                  Kozlov               11    yes   flu                  Sokolov              Park_Rd              #2
+Sofia                Belova               7     no    angina               Morozov              -                   
+Denis                Volkov               13    yes   cold                 Lebedev              Oak_St               #5
 
 
-1     Max                  Kozlov               11    yes   flu                  Sokolov              Park Rd              #2
-2     Kirill               Nikitin              8     no    flu                  Sidorov              -                   
-3     Fedor                Rolevich             12    yes   flu                  Kovalev              Lenin Ave            #7
-4     Ilya                 Shved                10    yes   flu                  Petrov               Main St              #3
+Max                  Kozlov               11    yes   flu                  Sokolov              Park_Rd              #2
+Kirill               Nikitin              8     no    flu                  Sidorov              -                   
+Fedor                Rolevich             12    yes   flu                  Kovalev              Lenin_Ave            #7
+Ilya                 Shved                10    yes   flu                  Petrov               Main_St              #3
 
 

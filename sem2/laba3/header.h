@@ -36,10 +36,12 @@ void read_line(char *buffer, int size, FILE *f);
 void GetInt(int *value);                                                                                                                             // Аб'ява функцыі бяспечнага ўводу цэлага ліку.
 void rewind_linux(void);                                                                                                                             // Аб'ява функцыі ачысткі буфера ўводу.
 void get_input_file_name(char *filename);
+void choose_input(Child **children, int *number_of_children);
 void get_output_file_name(char *filename);
 void memory_allocation_Child(Child **children, int number_of_children);                                                                              // Аб'ява функцыі выдзялення памяці пад масіў дзяцей.
 void write_children_to_file(const char *filename, Child *children, int count, const char *mode);
 void read_children_from_file(const char *filename, Child **children, int *count);
+void input_Child(Child **children, int *number_of_children);                                                                                         // Аб'ява функцыі ўводу дадзеных пра дзяцей.
 void output_Child(Child *children, int number_of_children);                                                                                          // Аб'ява функцыі вываду ўсіх дзяцей.
 int compare_by_surname(const void *a, const void *b);                                                                                               // Аб'ява функцыі параўнання па прозвішчы для qsort.
 void children_analysis(Child *children, int number_of_children, Child **result, int *result_count, const char *target_illness);                      // Аб'ява функцыі аналізу і фільтрацыі дзяцей.

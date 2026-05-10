@@ -28,10 +28,60 @@ void memory_allocation_Child(Child **children,int number_of_children)
     }
 }
 
+
+void input_Child(Child **children, int *number_of_children)
+{
+    printf("Enter number of children: ");
+    GetInt(number_of_children);                                                                     // Увод колькасці дзяцей.
+    memory_allocation_Child(children, *number_of_children);                                         // Выдзяленне памяці пад патрэбную колькасць дзяцей.
+
+    for (int i = 0; i < *number_of_children; i++)
+    {
+        Child *c = *children + i;                                                                   // Арыфметыка паказальнікаў: пачатак масіву + зрух.
+        printf("\n--- Child %d ---\n", i + 1);
+
+        printf("First name: ");
+        read_line(c->first_name, MAX_ALLOWED, stdin);                                               // Счытванне імя дзіцяці.
+
+        printf("Surname: ");
+        read_line(c->surname, MAX_ALLOWED, stdin);                                                  // Счытванне прозвішча дзіцяці.
+
+        printf("Age: ");
+        GetInt(&c->age);                                                                            // Увод узросту дзіцяці.
+
+        printf("Was hospitalized? (1=yes, 0=no): ");
+        GetInt(&c->was_hospitalized);                                                               // Увод флага шпіталізацыі.
+
+        if (c->was_hospitalized)
+        {
+            printf("Illness: ");
+            read_line(c->health_information.hospital.illness, MAX_ALLOWED, stdin);                  // Счытванне назвы хваробы (шпіталь).
+
+            printf("Attending doctor: ");
+            read_line(c->health_information.hospital.attending_doctor, MAX_ALLOWED, stdin);         // Счытванне імя лечачага ўрача.
+
+            printf("Hospital address: ");
+            read_line(c->health_information.hospital.adress, MAX_ALLOWED, stdin);                  // Счытванне адраса бальніцы.
+
+            printf("Hospital number: ");
+            GetInt(&c->health_information.hospital.hospital_number);                               // Увод нумара бальніцы.
+        }
+        else
+        {
+            printf("Illness: ");
+            read_line(c->health_information.local.illness, MAX_ALLOWED, stdin);                    // Счытванне назвы хваробы (мясцовы ўрач).
+
+            printf("Local doctor: ");
+            read_line(c->health_information.local.local_doctor, MAX_ALLOWED, stdin);               // Счытванне імя мясцовага ўрача.
+        }
+    }
+}
+
+
 void get_input_file_name(char *filename)
 {
     printf("Enter file name to read:\n");
-    fgets(filename,MAX_FILENAME,stdin);
+    fgets(filename,MAX_FILENAME,stdin);                                                
     filename[strcspn(filename,"\n")] = 0;
 }
 
@@ -42,54 +92,95 @@ void get_output_file_name(char *filename)
     filename[strcspn(filename,"\n")] = 0;
 }
 
-void read_children_from_file(const char *filename, Child **children, int *count)
+void read_children_from_file(const char *filename, Child **children, int *count)                        //Злічыць структуру з файла.
 {
-    FILE *f = fopen(filename, "r");
+    FILE *f = fopen(filename, "r");                                                                     //Адкрыць файл для чытання.
     if (!f)
     {
         printf("Error opening file for reading.\n");
         return;
     }
 
-    fscanf(f,"%d\n",count);
+    int capacity = 16;                                                                                   //Зменная для выдзялення памяці.
+    *count = 0;
+    *children = malloc(capacity * sizeof(Child));
 
-    *children = malloc((*count) * sizeof(Child));
-    for (int i = 0; i < *count; i++)
+    char line[MAX_ALLOWED];
+    while (fgets(line, sizeof(line), f))                                                                 //Цыкл па радках файлу.
     {
-        Child *c = &(*children)[i];
-
-        read_line(c->first_name, MAX_ALLOWED, f);
-        read_line(c->surname, MAX_ALLOWED, f);
-
-        fscanf(f,"%d\n",&c->age);
-        fscanf(f,"%d\n",&c->was_hospitalized);
-
-        if (c->was_hospitalized)
+        Child c = {0};
+        char hosp[4];
+        if (sscanf(line, "%19s %19s %d %3s %19s %19s %19s #%d",
+                   c.first_name, c.surname, &c.age, hosp,
+                   c.health_information.hospital.illness,
+                   c.health_information.hospital.attending_doctor,
+                   c.health_information.hospital.adress,
+                   &c.health_information.hospital.hospital_number) == 8
+                   && strcmp(hosp, "yes") == 0)
         {
-            read_line(c->health_information.hospital.illness, MAX_ALLOWED, f);
-            read_line(c->health_information.hospital.attending_doctor, MAX_ALLOWED, f);
-            read_line(c->health_information.hospital.adress, MAX_ALLOWED, f);
-
-            fscanf(f,"%d\n",&c->health_information.hospital.hospital_number);
+            c.was_hospitalized = 1;
+        }
+        else if (sscanf(line, "%19s %19s %d %3s %19s %19s",
+                        c.first_name, c.surname, &c.age, hosp,
+                        c.health_information.local.illness,
+                        c.health_information.local.local_doctor) == 6
+                        && strcmp(hosp, "no") == 0)
+        {
+            c.was_hospitalized = 0;
         }
         else
         {
-            read_line(c->health_information.local.illness, MAX_ALLOWED, f);
-            read_line(c->health_information.local.local_doctor, MAX_ALLOWED, f);
+            continue;
         }
+
+        if (*count >= capacity)                                                                             //Перавыдзяленне памяці.
+        {
+            capacity *= 2;
+            *children = realloc(*children, capacity * sizeof(Child));
+        }
+        (*children)[(*count)++] = c;
     }
+
     fclose(f);
+}
+
+void choose_input(Child **children, int *number_of_children)                                        //Функцыя выюару тыпу ўводу.
+{
+    int choice;
+    printf("Choose input method:\n");
+    printf("1. Read from file\n");
+    printf("2. Enter from keyboard\n");
+    printf("Your choice: ");
+    GetInt(&choice);
+
+    switch (choice)
+    {
+        case 1:                                                                                     //Злічыць з файла.
+        {
+            char filename[MAX_FILENAME];
+            get_input_file_name(filename);
+            read_children_from_file(filename, children, number_of_children);
+            break;
+        }
+        case 2:                                                                                     ///Злічыць з клавіятуры.
+            input_Child(children, number_of_children);
+            break;
+        default:
+            printf("Invalid choice. Defaulting to keyboard input.\n");
+            input_Child(children, number_of_children);
+            break;
+    }
 }
 
 void read_line(char *buffer, int size, FILE *f)
 {
     if (fgets(buffer, size, f) != NULL)
     {
-        buffer[strcspn(buffer, "\n")] = '\0';  // remove '\n'
+        buffer[strcspn(buffer, "\n")] = '\0';                                                           //Замяніць \n на \0.
     }
 }
 
-void write_children_to_file(const char *filename, Child *children, int count, const char *mode)
+void write_children_to_file(const char *filename, Child *children, int count, const char *mode)         //Функцыя запісу ў файл.
 {
     FILE *f = fopen(filename, mode);
     if (!f)                                                                                                                                                                  
@@ -97,9 +188,6 @@ void write_children_to_file(const char *filename, Child *children, int count, co
         printf("Error opening file for writing.\n");
         return;
     }
-
-    // fprintf(f,"%-5s %-20s %-20s %-5s %-5s %-20s %-20s %-20s\n",
-    //        "No.", "First Name", "Surname", "Age", "Hosp", "Illness", "Doctor", "Address/Hospital#");
 
     for (int i = 0; i < count; i++)
     {

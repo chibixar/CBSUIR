@@ -1,0 +1,52 @@
+7
+Ilya
+Shved
+10
+1
+flu
+Petrov
+Main St
+3
+Kirill
+Nikitin
+8
+0
+flu
+Sidorov
+Fedor
+Rolevich
+12
+1
+flu
+Kovalev
+Lenin Ave
+7
+Anna
+Ivanova
+9
+0
+cold
+Petrov
+Max
+Kozlov
+11
+1
+flu
+Sokolov
+Park Rd
+2
+Sofia
+Belova
+7
+0
+angina
+Morozov
+Denis
+Volkov
+13
+1
+cold
+Lebedev
+Oak St
+5
+flu
