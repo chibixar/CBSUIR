@@ -37,26 +37,26 @@ void enqueue(HospitalQueue *q, Hospital h) {                                // �
     new_node->data = h;
     new_node->next = NULL;
 
-    if (q->rear == NULL) {
-        q->front = new_node;
-        q->rear = new_node;
+    if (q->tail == NULL) {
+        q->head = new_node;
+        q->tail = new_node;
     } else {
-        q->rear->next = new_node;
-        q->rear = new_node;
+        q->tail->next = new_node;
+        q->tail = new_node;
     }
     q->size++;
 }
 
 Hospital dequeue(HospitalQueue *q) {                                        // Выдаленне бальніцы з пачатку чаргі.
-    if (q->front == NULL) {
+    if (q->head == NULL) {
         Hospital empty = {0};
         return empty;
     }
-    Node *temp = q->front;
+    Node *temp = q->head;
     Hospital h = temp->data;
-    q->front = q->front->next;
+    q->head = q->head->next;
     
-    if (q->front == NULL) q->rear = NULL;
+    if (q->head == NULL) q->tail = NULL;
     
     free(temp);
     q->size--;
@@ -132,11 +132,7 @@ void discharge_patient(HospitalQueue *q, const char *name) {
 
 void print_queue_status(HospitalQueue *q) {                                 // Вывад стану ўсіх бальніц у табліцы.
     int n = q->size;
-    
-    printf("\n=================================================================================================\n");
-    printf("| %-3s | %-14s | %-10s | %-13s | %-37s |\n", "ID", "Loc (X, Y)", "Beds (F/T)", "Distance Func", "Patients");
-    printf("|=====|================|============|===============|=======================================|\n");
-    
+    printf("\n| %-3s | %-14s | %-10s | %-13s | %-37s |\n", "ID", "Loc (X, Y)", "Beds (F/T)", "Distance Func", "Patients");
     for (int i = 0; i < n; i++) {
         Hospital current = dequeue(q);
         
@@ -159,12 +155,11 @@ void print_queue_status(HospitalQueue *q) {                                 // �
         
         const char *dist_name = (current.get_distance == dist_euclidean) ? "Euclidean" : "Manhattan";
 
-        printf("| %-3d | %-14s | %-10s | %-13s | %-37.37s |\n",
+        printf("| %-3d | %-14s | %-10s | %-13s | %-37s\n",
                current.id, loc_str, beds_str, dist_name, patients_str);
-
         enqueue(q, current);
     }
-    printf("=================================================================================================\n");
+
 }
 
 void load_hospitals_file(const char *filename, HospitalQueue *q) {          // Загрузка даных бальніц з тэкставага файла.
