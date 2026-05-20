@@ -1,0 +1,224 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 2121" width="210mm" height="297mm">
+    <style>
+        rect, polygon, path, line, circle, polyline { fill: none; stroke: black; stroke-width: 1.5; }
+        text { font-family: Arial, sans-serif; font-size: 14px; fill: black; stroke: none; }
+        .bg { fill: white; stroke: none; }
+    </style>
+    <rect class="bg" x="0" y="0" width="1500" height="2121"/>
+
+    <defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+            <path d="M 0,0 L 10,5 L 0,10 Z" style="fill: black; stroke: none;" />
+        </marker>
+
+        <!-- 1. TERMINAL (H=60) -->
+        <rect id="term" x="-120" y="-30" width="240" height="60" rx="30" ry="30" />
+        
+        <!-- 2. PROCESS (W=240, H=120) -->
+        <rect id="rect" x="-120" y="-60" width="240" height="120" />
+        
+        <!-- 3. PREPROC. Strict 1:6:1 Ratio. -->
+        <g id="proc">
+            <rect x="-120" y="-60" width="240" height="120" />
+            <line x1="-90" x2="-90" y1="-60" y2="60" />
+            <line x1="90" x2="90" y1="-60" y2="60" />
+        </g>
+        
+        <!-- 4. DECISION (Rhombus) -->
+        <polygon id="rhomb" points="0,-60 120,0 0,60 -120,0" />
+        
+        <!-- 5. I/O (Parallelogram) -->
+        <polygon id="io" points="-90,-60 120,-60 90,60 -120,60" />
+
+        <!-- 6. CONNECTOR (Circle R=25) -->
+        <circle id="conn" cx="0" cy="0" r="25" />
+    </defs>
+
+    <!-- ================= СЛУП 1 (X = 250) ================= -->
+    
+    <g transform="translate(250, 100)">
+        <use href="#term"/>
+        <text x="0" y="5" text-anchor="middle">Начало</text>
+    </g>
+    <path d="M 250,130 L 250,235" marker-end="url(#arrow)" />
+
+    <g transform="translate(250, 300)">
+        <use href="#rect"/>
+        <text x="0" y="-20" text-anchor="middle">Ув: няма, лак: sys,</text>
+        <text x="0" y="0" text-anchor="middle">currentUser, attempts, save</text>
+        <text x="0" y="20" text-anchor="middle">Вых: код завяршэння</text>
+    </g>
+    <path d="M 250,360 L 250,435" marker-end="url(#arrow)" />
+
+    <g transform="translate(250, 500)">
+        <use href="#proc"/>
+        <text x="0" y="-10" text-anchor="middle">выклік ф.</text>
+        <text x="0" y="10" text-anchor="middle">sys_init(&amp;sys)</text>
+    </g>
+    <path d="M 250,560 L 250,635" marker-end="url(#arrow)" />
+
+    <g transform="translate(250, 700)">
+        <use href="#io"/>
+        <text x="0" y="-10" text-anchor="middle">Вывесці загаловак</text>
+        <text x="0" y="10" text-anchor="middle">і запрашэнне да ўводу</text>
+    </g>
+    <path d="M 250,760 L 250,835" marker-end="url(#arrow)" />
+
+    <g transform="translate(250, 900)">
+        <use href="#rect"/>
+        <text x="0" y="-10" text-anchor="middle">Ініцыял. знач.</text>
+        <text x="0" y="10" text-anchor="middle">attempts = 0</text>
+    </g>
+    <path d="M 250,960 L 250,1035" marker-end="url(#arrow)" />
+
+    <g transform="translate(250, 1100)">
+        <use href="#rhomb"/>
+        <text x="0" y="-10" text-anchor="middle">auth_login()</text>
+        <text x="0" y="10" text-anchor="middle">вяртае 0?</text>
+    </g>
+    <path d="M 250,1160 L 250,1235" marker-end="url(#arrow)" />
+    <text x="265" y="1180">Да</text>
+    
+    <!-- Пераход пры паспяховай аўтарызацыі (выхад з цыкла) -->
+    <path d="M 370,1100 L 405,1100" marker-end="url(#arrow)" />
+    <text x="380" y="1090">Нет</text>
+    
+    <g transform="translate(435, 1100)">
+        <use href="#conn"/>
+        <text x="0" y="5" text-anchor="middle">B</text>
+    </g>
+
+    <g transform="translate(250, 1300)">
+        <use href="#rect"/>
+        <text x="0" y="-10" text-anchor="middle">Прысв. знач.</text>
+        <text x="0" y="10" text-anchor="middle">attempts = attempts + 1</text>
+    </g>
+    <path d="M 250,1360 L 250,1435" marker-end="url(#arrow)" />
+
+    <g transform="translate(250, 1500)">
+        <use href="#rhomb"/>
+        <text x="0" y="5" text-anchor="middle">attempts &gt;= 3?</text>
+    </g>
+    <path d="M 250,1560 L 250,1635" marker-end="url(#arrow)" />
+    <text x="265" y="1580">Да</text>
+
+    <!-- Памылковая спроба ўводу (attempts < 3) -->
+    <path d="M 370,1500 L 500,1500 L 500,1465" marker-end="url(#arrow)" />
+    <text x="380" y="1490">Нет</text>
+
+    <g transform="translate(500, 1400)">
+        <use href="#io"/>
+        <text x="0" y="-10" text-anchor="middle">Вывесці</text>
+        <text x="0" y="10" text-anchor="middle">"Invalid credentials..."</text>
+    </g>
+    <!-- Вяртанне ў пачатак цыкла (да Rhombus 1100) -->
+    <path d="M 500,1340 L 500,1000 L 250,1000 L 250,1035" marker-end="url(#arrow)" />
+
+    <!-- Блакаванне (attempts >= 3) -->
+    <g transform="translate(250, 1700)">
+        <use href="#io"/>
+        <text x="0" y="-10" text-anchor="middle">Вывесці</text>
+        <text x="0" y="10" text-anchor="middle">"Too many attempts..."</text>
+    </g>
+    <path d="M 250,1760 L 250,1870" marker-end="url(#arrow)" />
+
+    <g transform="translate(250, 1900)">
+        <use href="#conn"/>
+        <text x="0" y="5" text-anchor="middle">A</text>
+    </g>
+
+    <!-- ================= СЛУП 2 (X = 750) ================= -->
+
+    <g transform="translate(750, 100)">
+        <use href="#conn"/>
+        <text x="0" y="5" text-anchor="middle">B</text>
+    </g>
+    <path d="M 750,125 L 750,235" marker-end="url(#arrow)" />
+
+    <g transform="translate(750, 300)">
+        <use href="#io"/>
+        <text x="0" y="-10" text-anchor="middle">Вывесці</text>
+        <text x="0" y="10" text-anchor="middle">"Welcome, ..."</text>
+    </g>
+    <path d="M 750,360 L 750,435" marker-end="url(#arrow)" />
+
+    <g transform="translate(750, 500)">
+        <use href="#proc"/>
+        <text x="0" y="-10" text-anchor="middle">выклік ф.</text>
+        <text x="0" y="10" text-anchor="middle">input_choose(&amp;sys)</text>
+    </g>
+    <path d="M 750,560 L 750,635" marker-end="url(#arrow)" />
+
+    <g transform="translate(750, 700)">
+        <use href="#proc"/>
+        <text x="0" y="-10" text-anchor="middle">выклік ф.</text>
+        <text x="0" y="10" text-anchor="middle">menu_main(&amp;sys, ...)</text>
+    </g>
+    <path d="M 750,760 L 750,835" marker-end="url(#arrow)" />
+
+    <g transform="translate(750, 900)">
+        <use href="#rhomb"/>
+        <text x="0" y="5" text-anchor="middle">sys.count &gt; 0?</text>
+    </g>
+    <path d="M 750,960 L 750,1035" marker-end="url(#arrow)" />
+    <text x="765" y="980">Да</text>
+    <path d="M 870,900 L 950,900 L 950,1800 L 750,1800" />
+    <text x="880" y="890">Нет</text>
+
+    <g transform="translate(750, 1100)">
+        <use href="#io"/>
+        <text x="0" y="-10" text-anchor="middle">Вывесці "Save data?"</text>
+        <text x="0" y="10" text-anchor="middle">і ўвесці save</text>
+    </g>
+    <path d="M 750,1160 L 750,1235" marker-end="url(#arrow)" />
+
+    <g transform="translate(750, 1300)">
+        <use href="#rhomb"/>
+        <text x="0" y="5" text-anchor="middle">save == 1?</text>
+    </g>
+    <path d="M 750,1360 L 750,1435" marker-end="url(#arrow)" />
+    <text x="765" y="1380">Да</text>
+    <path d="M 870,1300 L 950,1300" />
+    <text x="880" y="1290">Нет</text>
+
+    <g transform="translate(750, 1500)">
+        <use href="#proc"/>
+        <text x="0" y="-10" text-anchor="middle">выклік ф.</text>
+        <text x="0" y="10" text-anchor="middle">output_choose(&amp;sys)</text>
+    </g>
+    <!-- Зліццё галін і пераход да ачысткі памяці -->
+    <path d="M 750,1560 L 750,1870" marker-end="url(#arrow)" />
+
+    <g transform="translate(750, 1900)">
+        <use href="#conn"/>
+        <text x="0" y="5" text-anchor="middle">C</text>
+    </g>
+
+    <!-- ================= СЛУП 3 (X = 1250) ================= -->
+
+    <g transform="translate(1250, 100)">
+        <use href="#conn"/>
+        <text x="0" y="5" text-anchor="middle">C</text>
+    </g>
+    <path d="M 1250,125 L 1250,235" marker-end="url(#arrow)" />
+
+    <!-- Кропка ўваходу для завяршэння праграмы пры памылцы (Connector A) -->
+    <g transform="translate(1050, 300)">
+        <use href="#conn"/>
+        <text x="0" y="5" text-anchor="middle">A</text>
+    </g>
+    <path d="M 1075,300 L 1125,300" marker-end="url(#arrow)" />
+
+    <g transform="translate(1250, 300)">
+        <use href="#proc"/>
+        <text x="0" y="-10" text-anchor="middle">выклік ф.</text>
+        <text x="0" y="10" text-anchor="middle">sys_free(&amp;sys)</text>
+    </g>
+    <path d="M 1250,360 L 1250,465" marker-end="url(#arrow)" />
+
+    <g transform="translate(1250, 500)">
+        <use href="#term"/>
+        <text x="0" y="5" text-anchor="middle">Конец</text>
+    </g>
+
+</svg>

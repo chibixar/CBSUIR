@@ -1,85 +1,196 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
-// раблю свой уласны bool, бо ў стандартным С яго няма
-typedef enum {
-    FALSE = 0,                      // хлусня
-    TRUE = 1                        // праўда
-} Boolean;
+#ifndef HEADER_H
+#define HEADER_H
 
-// напрамак
+// ===================== КАНСТАНТЫ =====================
+#define MAX_FILENAME   100
+#define MAX_FLIGHTS    1024                                  // Максімальная колькасць рэйсаў у сістэме.
+
+// ===================== ПЕРАЛІЧЭННІ =====================
+
+typedef enum { FALSE = 0, TRUE = 1 } Boolean;               // Уласны булеан, бо ў C89/C90 яго няма.
+
 typedef enum {
-    ARRIVAL = 0,                    // прылёт
-    DEPARTURE = 1                   // вылет
+    ARRIVAL   = 0,                                          // Прылёт.
+    DEPARTURE = 1                                           // Вылет.
 } FlightType;
 
-// магчымыя станы рэйса на табло
 typedef enum {
-    ON_TIME = 0,                    // па раскладзе
-    DELAYED = 1,                    // спазняецца
-    BOARDING = 2,                   // пасадка (калі гэта вылет)
-    DEPARTED = 3,                   // ужо вылецеў
-    LANDED = 4,                     // ужо прызямліўся
-    CANCELED = 5                    // адменены
+    ON_TIME  = 0,                                           // Па раскладзе.
+    DELAYED  = 1,                                           // Спазняецца.
+    BOARDING = 2,                                           // Пасадка (вылет).
+    DEPARTED = 3,                                           // Ужо вылецеў.
+    LANDED   = 4,                                           // Ужо прызямліўся.
+    CANCELED = 5                                            // Адменены.
 } FlightStatus;
 
-// для падзелу правоў у праграме
 typedef enum {
-    ROLE_PASSENGER = 0,             // можа толькі глядзець табло і шукаць
-    ROLE_ADMIN = 1                  // можа дадаваць, рэдагаваць і выдаляць
+    ROLE_PASSENGER = 0,                                     // Толькі прагляд.
+    ROLE_ADMIN     = 1                                      // Поўны доступ.
 } UserRole;
 
+// ===================== СТРУКТУРЫ =====================
+
 typedef struct {
-    char username[30];              // логін карыстальніка
-    char password[30];              // пароль (для курсавой хопіць радка)
-    UserRole role;                  // узровень доступу
+    char     username[30];                                  // Лагін.
+    char     password[30];                                  // Пароль.
+    UserRole role;                                          // Узровень доступу.
 } User;
 
-// захоўваю час асобнымі лічбамі для зручнага сартавання
-typedef struct {
-    int day;                        // дзень
-    int month;                      // месяц
-    int year;                       // год
-    int hour;                       // гадзіны
-    int minute;                     // хвіліны
+typedef struct {                                            // Час захоўваецца асобнымі палямі — зручна для сартавання.
+    int day;
+    int month;
+    int year;
+    int hour;
+    int minute;
 } DateTime;
 
-// асноўная структура аднаго рэйса
 typedef struct {
-    char flightNumber[10];          // нумар, напрыклад "B2-737"
-    char airline[50];               // авіякампанія
-    char city[50];                  // куды ляціць або адкуль прылятае
-    char airplaneModel[30];         // мадэль самалёта
-    
-    FlightType type;                // прылёт або вылет
-    DateTime scheduleTime;          // час па плане
-    DateTime actualTime;            // рэальны час (важна пры затрымцы)
-    FlightStatus status;            // бягучы стан рэйса
-    
-    char terminal;                  // літара тэрмінала (A, B, C...)
-    int gate;                       // нумар гейта для пасадкі
+    char         flightNumber[10];                          // Нумар рэйса, напрыклад "B2-737".
+    char         airline[50];                               // Авіякампанія.
+    char         city[50];                                  // Горад прылёту або вылету.
+    char         airplaneModel[30];                         // Мадэль самалёта.
+
+    FlightType   type;                                      // Прылёт або вылет.
+    DateTime     scheduleTime;                              // Час па плане.
+    DateTime     actualTime;                                // Рэальны час з улікам затрымкі.
+    FlightStatus status;                                    // Бягучы стан.
+
+    char         terminal;                                  // Літара тэрмінала (A, B, C...).
+    int          gate;                                      // Нумар гейта.
 } Flight;
 
-// база дадзеных майго аэрапорта (дынамічны масіў)
+typedef struct {                                            // Фільтр для разумнага пошуку.
+    Boolean    useTypeFilter;
+    FlightType targetType;
+
+    Boolean      useCityFilter;
+    char         targetCity[50];
+
+    Boolean      useStatusFilter;
+    FlightStatus targetStatus;
+
+    Boolean  useTimeFilter;
+    DateTime startTime;
+} SearchFilter;
+
+// ==================== СТЭК ====================
+
+typedef struct StackNode {
+    Flight          data;
+    struct StackNode *next;
+} StackNode;
+
 typedef struct {
-    Flight *flights;                // указальнік на масіў у памяці
-    int count;                      // колькі рэйсаў рэальна запісана зараз
-    int capacity;                   // на колькі месцаў выдзелена памяць
+    StackNode *top;
+    int        size;
+} Stack;
+
+// ==================== ЧАРГА ====================
+
+typedef struct QueueNode {
+    Flight           data;
+    struct QueueNode *next;
+} QueueNode;
+
+typedef struct {
+    QueueNode *head;
+    QueueNode *tail;
+    int        size;
+} Queue;
+
+// ==================== БІНАРНАЕ ДРЭВА ====================
+
+typedef struct TreeNode {
+    Flight           data;
+    struct TreeNode  *left;
+    struct TreeNode  *right;
+} TreeNode;
+
+// ==================== АСНОЎНАЯ СІСТЭМА ====================
+
+typedef struct {
+    Flight flights[MAX_FLIGHTS];                            // Асноўны масіў усіх рэйсаў.
+    int    count;                                           // Колькасць рэйсаў зараз.
+    Stack  history;                                         // Стэк для адмены дзеянняў.
+    Queue  pendingQueue;                                    // Чарга рэйсаў на пацвярджэнне.
+    TreeNode *searchTree;                                   // BST для хуткага пошуку.
 } AirportSystem;
 
-// структура-фільтр для разумнага пошуку
-// калі сцяг (use...) у TRUE, значыць улічваю гэты параметр пры адборы
-typedef struct {
-    Boolean useTypeFilter;          // ці шукаю па канкрэтным напрамку
-    FlightType targetType;          // сам напрамак (прылёт/вылет)
+// ==================== ПРАТАТЫПЫ ФУНКЦЫЙ ====================
 
-    Boolean useCityFilter;          // ці шукаю па горадзе
-    char targetCity[50];            // назва горада для пошуку
+void         read_line(char *buf, int size, FILE *f);
+void         rewind_stdin(void);
+void         GetInt(int *value);
+void         GetChar(char *value);
+void         clear_screen(void);
+void         press_enter(void);
 
-    Boolean useStatusFilter;        // ці шукаю па статусе
-    FlightStatus targetStatus;      // сам статус (напрыклад, затрымліваюцца)
-    
-    Boolean useTimeFilter;          // ці шукаю па часе
-    DateTime startTime;             // шукаю рэйсы толькі пасля гэтага часу
-} SearchFilter;
+void         datetime_print(DateTime dt);
+int          datetime_compare(DateTime a, DateTime b);
+void         datetime_input(DateTime *dt);
+
+const char  *flight_type_str(FlightType t);
+const char  *flight_status_str(FlightStatus s);
+FlightType   parse_flight_type(const char *s);
+FlightStatus parse_flight_status(const char *s);
+
+void         flight_print_header(void);
+void         flight_print_row(int idx, const Flight *f);
+void         flight_input_keyboard(Flight *f);
+int          flight_parse_line(const char *line, Flight *f);
+Boolean      flight_matches_filter(const Flight *f, const SearchFilter *filter);
+
+void         stack_init(Stack *s);
+void         stack_push(Stack *s, Flight f);
+Boolean      stack_pop(Stack *s, Flight *out);
+Boolean      stack_peek(const Stack *s, Flight *out);
+void         stack_free(Stack *s);
+
+void         queue_init(Queue *q);
+void         queue_enqueue(Queue *q, Flight f);
+Boolean      queue_dequeue(Queue *q, Flight *out);
+void         queue_free(Queue *q);
+void         queue_print(const Queue *q);
+
+TreeNode    *bst_insert(TreeNode *root, Flight f);
+TreeNode    *bst_search(TreeNode *root, const char *flightNumber);
+TreeNode    *bst_delete(TreeNode *root, const char *flightNumber);
+void         bst_inorder_print(TreeNode *root);
+void         bst_free(TreeNode *root);
+
+void         sys_init(AirportSystem *sys);
+void         sys_free(AirportSystem *sys);
+void         sys_add_flight(AirportSystem *sys, Flight f);
+Boolean      sys_find_by_number(AirportSystem *sys, const char *num, int *outIdx);
+void         sys_delete_flight(AirportSystem *sys, int idx);
+void         sys_update_status(AirportSystem *sys, int idx, FlightStatus newStatus);
+void         sys_sort_by_schedule(AirportSystem *sys);
+void         sys_print_all(AirportSystem *sys);
+void         sys_search(AirportSystem *sys, const SearchFilter *filter);
+void         sys_undo(AirportSystem *sys);
+
+void         input_choose(AirportSystem *sys);
+void         input_keyboard(AirportSystem *sys);
+void         input_txt_file(AirportSystem *sys);
+void         input_binary_file(AirportSystem *sys);
+
+void         output_choose(AirportSystem *sys);
+void         output_txt_file(AirportSystem *sys, const char *filename);
+void         output_binary_file(AirportSystem *sys, const char *filename);
+
+void         menu_main(AirportSystem *sys, User *currentUser);
+void         menu_search(AirportSystem *sys);
+void         menu_add(AirportSystem *sys);
+void         menu_edit(AirportSystem *sys);
+void         menu_delete(AirportSystem *sys);
+void         menu_pending_queue(AirportSystem *sys);
+void         menu_bst(AirportSystem *sys);
+
+Boolean      auth_login(User *out);
+
+#endif

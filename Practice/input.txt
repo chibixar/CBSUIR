@@ -1,0 +1,10 @@
+# Airport Flight Database — sample data
+# Format: FlightNum Type Airline City Aircraft Sched(DD.MM.YYYY/HH:MM) Actual(DD.MM.YYYY/HH:MM) Status Terminal Gate
+B2-737    DEP Belavia          Minsk      B737-800             25.05.2026/14:00 25.05.2026/14:00 On_time  A 5
+LH-1234   ARR Lufthansa        Frankfurt  A320                 25.05.2026/09:30 25.05.2026/09:50 Delayed  B 12
+FR-9901   DEP Ryanair          Dublin     B737-MAX             25.05.2026/11:00 25.05.2026/11:00 Boarding C 3
+SU-1502   ARR Aeroflot         Moscow     SU-100               25.05.2026/16:45 25.05.2026/16:45 On_time  A 7
+QR-421    DEP Qatar_Airways    Doha       A380                 25.05.2026/22:10 25.05.2026/23:30 Delayed  B 1
+TK-009    ARR Turkish_Airlines Istanbul   B777                 25.05.2026/07:15 25.05.2026/07:15 Landed   C 9
+W6-3302   DEP Wizz_Air         Budapest   A321neo              25.05.2026/13:20 25.05.2026/13:20 On_time  A 4
+EK-502    ARR Emirates         Dubai      A380                 25.05.2026/19:05 25.05.2026/19:05 On_time  B 2
