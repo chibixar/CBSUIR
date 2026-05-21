@@ -4,7 +4,7 @@
         text { font-family: Arial, sans-serif; font-size: 14px; fill: black; stroke: none; }
         .bg { fill: white; stroke: none; }
     </style>
-    <rect class="bg" x="0" y="0" width="1500" height="2121"/>
+    <rect class="bg" x="0" y="0" width="800" height="1750"/>
 
     <defs>
         <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
@@ -46,8 +46,8 @@
     <path d="M 250,480 L 250,520" marker-end="url(#arrow)" />
     <text x="265" y="500">Не</text>
 
-    <!-- Early return (Yes) -->
-    <path d="M 370,420 L 600,420 L 600,1700 L 370,1700" marker-end="url(#arrow)" />
+    <!-- Early return (Yes) - ИСПРАВЛЕНО: Слияние с вертикальной линией перед "Конец" (Y=1635) -->
+    <path d="M 370,420 L 600,420 L 600,1635 L 250,1635" />
     <text x="380" y="410">Так</text>
 
     <g transform="translate(250, 580)">
@@ -69,6 +69,8 @@
         <text x="0" y="-10" text-anchor="middle">Прысв. знач.</text>
         <text x="0" y="10" text-anchor="middle">i = idx</text>
     </g>
+    
+    <!-- Вертикальная линия, идущая в ромб -->
     <path d="M 250,960 L 250,1000" marker-end="url(#arrow)" />
 
     <g transform="translate(250, 1060)">
@@ -78,8 +80,8 @@
     <path d="M 250,1120 L 250,1160" marker-end="url(#arrow)" />
     <text x="265" y="1140">Так</text>
 
-    <!-- Loop exit (No branch) -->
-    <path d="M 370,1060 L 450,1060 L 450,1470 L 250,1470 L 250,1480" marker-end="url(#arrow)" />
+    <!-- Loop exit (No branch) - Хвостик исправлен ранее -->
+    <path d="M 370,1060 L 450,1060 L 450,1460 L 250,1460 L 250,1480" marker-end="url(#arrow)" />
     <text x="380" y="1050">Не</text>
 
     <g transform="translate(250, 1220)">
@@ -95,14 +97,16 @@
         <text x="0" y="10" text-anchor="middle">i = i + 1</text>
     </g>
     
-    <!-- Loop back -->
-    <path d="M 250,1440 L 250,1455 L 70,1455 L 70,1000 L 250,1000" marker-end="url(#arrow)" />
+    <!-- Loop back - Слияние исправлено ранее -->
+    <path d="M 250,1440 L 250,1450 L 70,1450 L 70,980 L 250,980" />
 
     <g transform="translate(250, 1540)">
         <use href="#rect"/>
         <text x="0" y="-10" text-anchor="middle">Прысв. знач.</text>
         <text x="0" y="10" text-anchor="middle">count = count - 1</text>
     </g>
+    
+    <!-- Последняя вертикальная линия в блок Конец (к ней теперь примыкает правая ветка) -->
     <path d="M 250,1600 L 250,1670" marker-end="url(#arrow)" />
 
     <g transform="translate(250, 1700)">

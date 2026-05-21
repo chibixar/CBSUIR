@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1850" width="100%" height="100%">
+    <style>
+        .line { fill: none; stroke: black; stroke-width: 2.5; }
+        .shape { fill: white; stroke: black; stroke-width: 2.5; }
+        .text { font-family: Arial, sans-serif; font-size: 24px; fill: black; text-anchor: middle; dominant-baseline: central; }
+        .label { font-family: Arial, sans-serif; font-size: 22px; fill: black; }
+        .bg { fill: white; stroke: none; }
+    </style>
+    <rect class="bg" x="0" y="0" width="1600" height="1850"/>
+
+    <defs>
+        <marker id="arrow" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="8" markerHeight="8" orient="auto">
+            <path d="M 0,0 L 12,6 L 0,12 Z" style="fill: black; stroke: none;" />
+        </marker>
+        
+        <!-- ТЕРМИНАТОР: Высота в 2 раза меньше (300x75) -->
+        <rect id="term" x="-150" y="-37.5" width="300" height="75" rx="37.5" ry="37.5" class="shape" />
+        
+        <!-- ПРОЦЕСС: (300x150) -->
+        <rect id="rect" x="-150" y="-75" width="300" height="150" class="shape" />
+        
+        <!-- ПРЕДОПРЕДЕЛЕННЫЙ ПРОЦЕСС -->
+        <g id="proc">
+            <rect x="-150" y="-75" width="300" height="150" class="shape" />
+            <line x1="-110" x2="-110" y1="-75" y2="75" class="line" />
+            <line x1="110" x2="110" y1="-75" y2="75" class="line" />
+        </g>
+        
+        <!-- ДАННЫЕ (Параллелограмм) -->
+        <polygon id="data" points="-110,-75 150,-75 110,75 -150,75" class="shape" />
+
+        <!-- РЕШЕНИЕ (Ромб) -->
+        <polygon id="rhomb" points="0,-75 150,0 0,75 -150,0" class="shape" />
+    </defs>
+
+    <!-- ЛЕВАЯ КОЛОНКА (X = 400) -->
+    <g transform="translate(400, 100)">
+        <use href="#term"/>
+        <text x="0" y="0" class="text">Начало</text>
+    </g>
+    <path d="M 400,137.5 L 400,325" class="line" marker-end="url(#arrow)"/>
+
+    <g transform="translate(400, 400)">
+        <use href="#data"/>
+        <text x="0" y="-20" class="text">Ув: sys, idx</text>
+        <text x="0" y="20" class="text">Вых: няма</text>
+    </g>
+    <path d="M 400,475 L 400,575" class="line" marker-end="url(#arrow)"/>
+
+    <g transform="translate(400, 650)">
+        <use href="#rhomb"/>
+        <text x="0" y="-20" class="text">idx &lt; 0 ці</text>
+        <text x="0" y="20" class="text">idx &gt;= count?</text>
+    </g>
+    <text x="430" y="765" class="label">Не</text>
+    <text x="580" y="625" class="label">Так</text>
+    <path d="M 400,725 L 400,825" class="line" marker-end="url(#arrow)"/>
+
+    <!-- Ранний выход (Так) -->
+    <path d="M 550,650 L 650,650 L 650,1525 L 1100,1525" class="line" />
+
+    <g transform="translate(400, 900)">
+        <use href="#proc"/>
+        <text x="0" y="-20" class="text">выклік ф.</text>
+        <text x="0" y="20" class="text">stack_push(...)</text>
+    </g>
+    <path d="M 400,975 L 400,1075" class="line" marker-end="url(#arrow)"/>
+
+    <g transform="translate(400, 1150)">
+        <use href="#proc"/>
+        <text x="0" y="-20" class="text">выклік ф.</text>
+        <text x="0" y="20" class="text">bst_delete(...)</text>
+    </g>
+    <path d="M 400,1225 L 400,1325" class="line" marker-end="url(#arrow)"/>
+
+    <g transform="translate(400, 1400)">
+        <use href="#rect"/>
+        <text x="0" y="-20" class="text">Прысв. знач.</text>
+        <text x="0" y="20" class="text">i = idx</text>
+    </g>
+
+    <!-- Переход в правую колонку -->
+    <path d="M 400,1475 L 400,1550 L 100,1550 L 100,40 L 1100,40" class="line"/>
+
+
+    <!-- ПРАВАЯ КОЛОНКА (X = 1100) -->
+    <path d="M 1100,40 L 1100,325" class="line" marker-end="url(#arrow)"/>
+
+    <!-- Возврат в цикл -->
+    <path d="M 1100,975 L 1100,1050 L 1400,1050 L 1400,100 L 1100,100" class="line" />
+
+    <g transform="translate(1100, 400)">
+        <use href="#rhomb"/>
+        <text x="0" y="0" class="text">i &lt; count - 1?</text>
+    </g>
+    <text x="1130" y="515" class="label">Так</text>
+    <text x="880" y="375" class="label">Не</text>
+    <path d="M 1100,475 L 1100,575" class="line" marker-end="url(#arrow)"/>
+
+    <!-- Выход из цикла (Не) -->
+    <path d="M 950,400 L 800,400 L 800,1300 L 1100,1300" class="line" />
+
+    <g transform="translate(1100, 650)">
+        <use href="#rect"/>
+        <text x="0" y="-20" class="text">Прысв. знач.</text>
+        <text x="0" y="20" class="text">flights[i] = flights[i+1]</text>
+    </g>
+    <!-- ИСПРАВЛЕНА ОШИБКА -->
+    <path d="M 1100,725 L 1100,825" class="line" marker-end="url(#arrow)"/>
+
+    <g transform="translate(1100, 900)">
+        <use href="#rect"/>
+        <text x="0" y="-20" class="text">Прысв. знач.</text>
+        <text x="0" y="20" class="text">i = i + 1</text>
+    </g>
+
+    <!-- Вертикальный "хвостик" в уменьшение счетчика -->
+    <path d="M 1100,1300 L 1100,1325" class="line" marker-end="url(#arrow)"/>
+
+    <g transform="translate(1100, 1400)">
+        <use href="#rect"/>
+        <text x="0" y="-20" class="text">Прысв. знач.</text>
+        <text x="0" y="20" class="text">count = count - 1</text>
+    </g>
+
+    <!-- Линия в блок "Конец" (с ранним выходом) -->
+    <path d="M 1100,1475 L 1100,1562.5" class="line" marker-end="url(#arrow)"/>
+
+    <g transform="translate(1100, 1600)">
+        <use href="#term"/>
+        <text x="0" y="0" class="text">Конец</text>
+    </g>
+</svg>

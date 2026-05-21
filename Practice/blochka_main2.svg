@@ -1,0 +1,203 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 2800" width="100%" height="100%">
+    <style>
+        .line { fill: none; stroke: black; stroke-width: 2.5; }
+        .shape { fill: white; stroke: black; stroke-width: 2.5; }
+        .text { font-family: Arial, sans-serif; font-size: 24px; fill: black; text-anchor: middle; dominant-baseline: central; }
+        .label { font-family: Arial, sans-serif; font-size: 22px; fill: black; }
+        .bg { fill: white; stroke: none; }
+    </style>
+    <rect class="bg" x="0" y="0" width="1700" height="2800"/>
+
+    <defs>
+        <marker id="arrow" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="8" markerHeight="8" orient="auto">
+            <path d="M 0,0 L 12,6 L 0,12 Z" style="fill: black; stroke: none;" />
+        </marker>
+        <rect id="term" x="-150" y="-37.5" width="300" height="75" rx="37.5" ry="37.5" class="shape" />
+        <rect id="rect" x="-150" y="-75" width="300" height="150" class="shape" />
+        <g id="proc">
+            <rect x="-150" y="-75" width="300" height="150" class="shape" />
+            <line x1="-110" x2="-110" y1="-75" y2="75" class="line" />
+            <line x1="110" x2="110" y1="-75" y2="75" class="line" />
+        </g>
+        <polygon id="data" points="-110,-75 150,-75 110,75 -150,75" class="shape" />
+        <polygon id="rhomb" points="0,-75 150,0 0,75 -150,0" class="shape" />
+    </defs>
+
+    <!-- ============================================================== -->
+    <!-- ЛЕВАЯ КОЛОНКА: Инициализация и Авторизация (Ось X = 400)       -->
+    <!-- ============================================================== -->
+
+    <g transform="translate(400, 100)">
+        <use href="#term"/>
+        <text x="0" y="0" class="text">Начало</text>
+    </g>
+    <path d="M 400,137.5 L 400,175" class="line" marker-end="url(#arrow)"/>
+
+    <g transform="translate(400, 250)">
+        <use href="#proc"/>
+        <text x="0" y="-20" class="text">выклік ф.</text>
+        <text x="0" y="20" class="text">sys_init(&amp;sys)</text>
+    </g>
+    <path d="M 400,325 L 400,375" class="line" marker-end="url(#arrow)"/>
+
+    <g transform="translate(400, 450)">
+        <use href="#data"/>
+        <text x="0" y="-20" class="text">Вывад</text>
+        <text x="0" y="20" class="text">загалоўка</text>
+    </g>
+    <path d="M 400,525 L 400,575" class="line" marker-end="url(#arrow)"/>
+
+    <g transform="translate(400, 650)">
+        <use href="#rect"/>
+        <text x="0" y="-20" class="text">Прысв. знач.</text>
+        <text x="0" y="20" class="text">attempts = 0</text>
+    </g>
+    
+    <!-- Точка слияния возврата цикла. Сразу после нее - стрелка в условие -->
+    <path d="M 400,725 L 400,760" class="line" />
+    <path d="M 400,760 L 400,800" class="line" marker-end="url(#arrow)"/>
+
+    <g transform="translate(400, 875)">
+        <use href="#rhomb"/>
+        <text x="0" y="-20" class="text">!auth_login</text>
+        <text x="0" y="20" class="text">(...)?</text>
+    </g>
+    <!-- Отступы для текста, чтобы не наезжали на линии -->
+    <text x="440" y="980" class="label">Так</text>
+    <text x="580" y="850" class="label">Не</text>
+    
+    <!-- Ветка ТАК (вниз) -->
+    <path d="M 400,950 L 400,1025" class="line" marker-end="url(#arrow)"/>
+
+    <!-- Ветка НЕ (вправо к успешному входу) -->
+    <path d="M 550,875 L 1200,875 L 1200,925" class="line" marker-end="url(#arrow)"/>
+
+    <g transform="translate(400, 1100)">
+        <use href="#rect"/>
+        <text x="0" y="-20" class="text">Прысв. знач.</text>
+        <text x="0" y="20" class="text">attempts++</text>
+    </g>
+    <path d="M 400,1175 L 400,1225" class="line" marker-end="url(#arrow)"/>
+
+    <g transform="translate(400, 1300)">
+        <use href="#rhomb"/>
+        <text x="0" y="0" class="text">attempts &gt;= 3?</text>
+    </g>
+    <text x="440" y="1410" class="label">Не</text>
+    <text x="580" y="1275" class="label">Так</text>
+    
+    <!-- Ветка НЕ (вниз) -->
+    <path d="M 400,1375 L 400,1450" class="line" marker-end="url(#arrow)"/>
+
+    <!-- Возврат к началу цикла -->
+    <g transform="translate(400, 1525)">
+        <use href="#data"/>
+        <text x="0" y="-20" class="text">Вывад</text>
+        <text x="0" y="20" class="text">"Invalid..."</text>
+    </g>
+    <path d="M 400,1600 L 400,1650 L 100,1650 L 100,760 L 400,760" class="line"/>
+
+    <!-- Ветка ТАК (вправо, ошибка авторизации, колонка X = 800) -->
+    <path d="M 550,1300 L 800,1300 L 800,1350" class="line" marker-end="url(#arrow)"/>
+    
+    <g transform="translate(800, 1425)">
+        <use href="#data"/>
+        <text x="0" y="-20" class="text">Вывад</text>
+        <text x="0" y="20" class="text">"Too many..."</text>
+    </g>
+    <path d="M 800,1500 L 800,1550" class="line" marker-end="url(#arrow)"/>
+
+    <g transform="translate(800, 1625)">
+        <use href="#proc"/>
+        <text x="0" y="-20" class="text">выклік ф.</text>
+        <text x="0" y="20" class="text">sys_free(&amp;sys)</text>
+    </g>
+    <path d="M 800,1700 L 800,1762.5" class="line" marker-end="url(#arrow)"/>
+
+    <g transform="translate(800, 1800)">
+        <use href="#term"/>
+        <text x="0" y="0" class="text">Конец</text>
+    </g>
+
+
+    <!-- ============================================================== -->
+    <!-- ПРАВАЯ КОЛОНКА: Главное меню и Выход (Ось X = 1200)            -->
+    <!-- ============================================================== -->
+
+    <g transform="translate(1200, 1000)">
+        <use href="#data"/>
+        <text x="0" y="-20" class="text">Вывад</text>
+        <text x="0" y="20" class="text">"Welcome..."</text>
+    </g>
+    <path d="M 1200,1075 L 1200,1125" class="line" marker-end="url(#arrow)"/>
+
+    <g transform="translate(1200, 1200)">
+        <use href="#proc"/>
+        <text x="0" y="-20" class="text">выклік ф.</text>
+        <text x="0" y="20" class="text">input_choose(...)</text>
+    </g>
+    <path d="M 1200,1275 L 1200,1325" class="line" marker-end="url(#arrow)"/>
+
+    <g transform="translate(1200, 1400)">
+        <use href="#proc"/>
+        <text x="0" y="-20" class="text">выклік ф.</text>
+        <text x="0" y="20" class="text">menu_main(...)</text>
+    </g>
+    <path d="M 1200,1475 L 1200,1525" class="line" marker-end="url(#arrow)"/>
+
+    <g transform="translate(1200, 1600)">
+        <use href="#rhomb"/>
+        <text x="0" y="0" class="text">sys.count &gt; 0?</text>
+    </g>
+    <text x="1240" y="1710" class="label">Так</text>
+    <text x="1380" y="1575" class="label">Не</text>
+    
+    <!-- Ветка ТАК (вниз) -->
+    <path d="M 1200,1675 L 1200,1725" class="line" marker-end="url(#arrow)"/>
+
+    <!-- Ветка НЕ (вправо) -->
+    <path d="M 1350,1600 L 1550,1600 L 1550,2320 L 1200,2320" class="line"/>
+
+    <g transform="translate(1200, 1800)">
+        <use href="#data"/>
+        <text x="0" y="-20" class="text">Увод</text>
+        <text x="0" y="20" class="text">save</text>
+    </g>
+    <path d="M 1200,1875 L 1200,1925" class="line" marker-end="url(#arrow)"/>
+
+    <g transform="translate(1200, 2000)">
+        <use href="#rhomb"/>
+        <text x="0" y="0" class="text">save == 1?</text>
+    </g>
+    <text x="1240" y="2110" class="label">Так</text>
+    <text x="1380" y="1975" class="label">Не</text>
+    
+    <!-- Ветка ТАК (вниз) -->
+    <path d="M 1200,2075 L 1200,2125" class="line" marker-end="url(#arrow)"/>
+    
+    <!-- Ветка НЕ (вправо) -->
+    <path d="M 1350,2000 L 1450,2000 L 1450,2320 L 1200,2320" class="line"/>
+
+    <g transform="translate(1200, 2200)">
+        <use href="#proc"/>
+        <text x="0" y="-20" class="text">выклік ф.</text>
+        <text x="0" y="20" class="text">output_choose(...)</text>
+    </g>
+    
+    <!-- Место слияния всех веток завершения (Y = 2320) -->
+    <path d="M 1200,2275 L 1200,2320" class="line" />
+    <path d="M 1200,2320 L 1200,2375" class="line" marker-end="url(#arrow)"/>
+
+    <g transform="translate(1200, 2450)">
+        <use href="#proc"/>
+        <text x="0" y="-20" class="text">выклік ф.</text>
+        <text x="0" y="20" class="text">sys_free(&amp;sys)</text>
+    </g>
+    <path d="M 1200,2525 L 1200,2587.5" class="line" marker-end="url(#arrow)"/>
+
+    <g transform="translate(1200, 2625)">
+        <use href="#term"/>
+        <text x="0" y="0" class="text">Конец</text>
+    </g>
+
+</svg>
