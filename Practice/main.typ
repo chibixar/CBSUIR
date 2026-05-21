@@ -13,7 +13,7 @@
     subject: "по учебной практике (ознакомительной)\nпо теме\nИНФОРМАЦИОННАЯ СИСТЕМА АЭРОПОРТА",
   ),
   student: (
-    name: "Ермаков В. С.",
+    name: "Минкевич А. С.",
     group: "558301"
   ),
   manager: (
@@ -31,11 +31,7 @@
 // =====================================================================
 // НАСТРОЙКИ АБЗАЦЕВ И ИНТЕРВАЛОВ
 // =====================================================================
-// leading: 0.65em — межстрочный интервал
-// spacing: 0.65em — расстояние между абзацами (приравниваем к межстрочному, чтобы не было пустых строк)
 #set par(justify: true, first-line-indent: 1.25cm, leading: 0.65em, spacing: 0.65em)
-
-// Настройка списков, чтобы они имели правильный отступ и не разрывали абзацы
 #set list(indent: 1.25cm, body-indent: 0.5em)
 #set enum(indent: 1.25cm, body-indent: 0.5em)
 
@@ -51,40 +47,33 @@
 #set heading(numbering: "1.1")
 
 #show heading: it => {
-  // Отбивка ПЕРЕД заголовком (одна пустая строка ~14pt)
   if it.level == 1 { pagebreak(weak: true) } else { v(14pt, weak: true) }
   
   set text(weight: "bold", size: 14pt)
-  set par(first-line-indent: 0pt) // Обнуляем стандартный абзац для самого блока заголовка
+  set par(first-line-indent: 0pt) 
   
   if it.level == 1 {
     if it.numbering == none {
-      // Ненумерованные (ВВЕДЕНИЕ, ЗАКЛЮЧЕНИЕ): по центру, ЗАГЛАВНЫМИ
       align(center)[#upper(it.body)]
     } else {
-      // Нумерованные (1 РАЗДЕЛ): по левому краю, отступ 1.25см жестко, ЗАГЛАВНЫМИ
       align(left)[#h(1.25cm)#counter(heading).display(it.numbering) #upper(it.body)]
     }
   } else {
-    // Подразделы (1.1 Подраздел): по левому краю, отступ 1.25см жестко, строчными
     align(left)[#h(1.25cm)#counter(heading).display(it.numbering) #it.body]
   }
   
-  // Отбивка ПОСЛЕ заголовка (одна пустая строка ~14pt)
   v(14pt, weak: true)
 }
 
 // =====================================================================
 // НАСТРОЙКИ РИСУНКОВ И ТАБЛИЦ
 // =====================================================================
-// Сброс счетчиков внутри каждого раздела 1-го уровня
 #show heading.where(level: 1): it => {
   counter(figure.where(kind: image)).update(0)
   counter(figure.where(kind: table)).update(0)
   it
 }
 
-// Рисунки
 #show figure.where(kind: image): set figure(
   numbering: n => numbering("1.1", counter(heading).get().first(), n),
   gap: 14pt
@@ -97,18 +86,16 @@
   [Рисунок ] + it.counter.display(it.numbering) + [ – ] + it.body
 }
 
-// Таблицы
 #show figure.where(kind: table): set figure(
   numbering: n => numbering("1.1", counter(heading).get().first(), n),
   gap: 14pt
 )
 #show figure.where(kind: table): set figure.caption(position: top)
-// Убираем красную строку внутри ячеек таблицы
 #show figure.where(kind: table): set par(first-line-indent: 0pt) 
 
 #show figure.caption.where(kind: table): it => {
   set align(left)
-  set par(first-line-indent: 0pt) // По ГОСТу подпись таблицы идет от левого края таблицы, без 1.25см
+  set par(first-line-indent: 0pt) 
   set text(weight: "regular")
   [Таблица ] + it.counter.display(it.numbering) + [ – ] + it.body
 }
@@ -133,7 +120,6 @@
 #heading(numbering: none, outlined: false)[СОДЕРЖАНИЕ]
 #outline(title: none, depth: 2, indent: auto)
 
-// УСЛОВИЕ ЗАДАНИЯ обычно идет как ненумерованный раздел
 #heading(numbering: none)[УСЛОВИЕ ЗАДАНИЯ]
 
 Напісаць праграму для кіравання інфармацыяй аб авіярэйсах аэрапорта. Праграма павінна выдаваць даведку пра маршрут, гэта значыць час рэйса, статус, тэрмінал і мадэль самалёта. Сістэма павінна дазваляць дадаваць, рэдагаваць і выдаляць рэйсы (з магчымасцю адмены апошняга дзеяння). 
@@ -165,7 +151,6 @@
       table.cell(colspan: 4, align: center)[*Структуры і тыпы дадзеных*]
     ),
 
-    // --- Пералічэнні ---
     table.cell(rowspan: 2)[*enum FlightType*],
     table.cell(colspan: 3)[ARRIVAL (0)],
     table.cell(colspan: 3)[DEPARTURE (1)],
@@ -176,12 +161,10 @@
     table.cell(colspan: 3)[LANDED, CANCELED],
     table.cell(colspan: 3)[(Цэлалікавыя значэнні ад 0 да 5)],
 
-    // --- Структура DateTime ---
     table.cell(rowspan: 2)[*struct DateTime*],
     table.cell(colspan: 3)[int day, month, year],
     table.cell(colspan: 3)[int hour, minute],
 
-    // --- Структура Flight ---
     table.cell(rowspan: 6)[*struct Flight*],
     table.cell(colspan: 3)[char flightNumber[10]],
     table.cell(colspan: 3)[char airline[50], city[50]],
@@ -190,7 +173,6 @@
     table.cell(colspan: 3)[FlightStatus status],
     table.cell(colspan: 3)[char terminal, int gate],
 
-    // --- Дынамічныя структуры ---
     table.cell(rowspan: 2)[*struct StackNode*],
     table.cell(colspan: 3)[Flight data],
     table.cell(colspan: 3)[struct StackNode\* next],
@@ -204,7 +186,6 @@
     table.cell(colspan: 3)[struct TreeNode\* left],
     table.cell(colspan: 3)[struct TreeNode\* right],
 
-    // --- Галоўная сістэма ---
     table.cell(rowspan: 6)[*struct AirportSystem*],
     table.cell(colspan: 3)[Flight flights[MAX_FLIGHTS]],
     table.cell(colspan: 3)[int count],
@@ -294,9 +275,7 @@
 Асаблівая ўвага пры распрацоўцы была нададзена надзейнасці ўводу дадзеных і бяспечнай працы з памяццю. Файлавы ўвод-вывад дазваляе бяспечна захоўваць базу дадзеных паміж сесіямі ў розных фарматах.
 
 У выніку выканання праекта былі не толькі замацаваны навыкі праграмавання на мове C, але і атрыманы каштоўны вопыт стварэння рэальнага прыкладання для працы з транспартнымі маршрутамі і складанымі структурамі дадзеных.
-// =====================================================================
-// СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ
-// =====================================================================
+
 #heading(numbering: none)[СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ]
 
 [1] Основы алгоритмизации и программирования : лаборатор. практикум для студентов специальности 1-40 02 01 «Вычисл. машины, системы и сети» всех форм обучения. В 2 ч. Ч. 2 / сост. Ю. А. Луцик [и др.]. – Минск : БГУИР, 2010. – 36 с. : ил.
@@ -309,25 +288,75 @@
 // ПРИЛОЖЕНИЯ
 // =====================================================================
 
+// Импортируем вашу библиотеку для рамок ЕСКД
+// (путь указан в соответствии с вашими исходниками)
+#import "frames/template.typ": eskd-scheme
+
 // Отключаем красную строку для блоков кода и картинок в приложениях
 #set par(first-line-indent: 0pt)
 
+
+// === ПРИЛОЖЕНИЕ А ===
 #appendix("А", "Схема алгоритма программы main")
-#align(center)[
-  #block(width: 90%, height: 400pt, stroke: 1pt, align(center + horizon)[Место для вставки экспортированной SVG блок-схемы (main)])
+
+#eskd-scheme(
+  title: "Блок-схема функции\nmain",
+  doc-code: "ГУИР.6-05-0611-05.420", 
+  dev-name: "Минкевич",
+  prov-name: "Ковальчук",
+  group-name: "ЭВМ, гр. 558301",
+  paper-format: "a4",
+  vertical: true
+)[
+  #align(center + horizon)[
+    // Укажите корректный путь к вашей PNG картинке!
+    // Параметры 100% + fit: "contain" идеально впишут блок-схему в доступное пространство внутри рамки.
+    #image("schema_main.png", width: 100%, height: 100%, fit: "contain")
+  ]
 ]
 
+
+// === ПРИЛОЖЕНИЕ Б ===
 #appendix("Б", "Схема алгоритма функции sys_delete_flight")
-#align(center)[
-  #block(width: 90%, height: 400pt, stroke: 1pt, align(center + horizon)[Место для вставки блок-схемы функции sys_delete_flight])
+
+#eskd-scheme(
+  title: "Блок-схема функции\nsys_delete_flight",
+  doc-code: "ГУИР.6-05-0611-05.420",
+  dev-name: "Минкевич",
+  prov-name: "Ковальчук",
+  group-name: "ЭВМ, гр. 558301",
+  paper-format: "a4",
+  vertical: true
+)[
+  #align(center + horizon)[
+    // Укажите правильное название вашей картинки для Б
+    #image("sys_delete_flight.png", width: 100%, height: 100%, fit: "contain")
+  ]
 ]
 
+
+// === ПРИЛОЖЕНИЕ В ===
 #appendix("В", "Схема алгоритма функции sys_sort_by_schedule")
-#align(center)[
-  #block(width: 90%, height: 400pt, stroke: 1pt, align(center + horizon)[Место для вставки блок-схемы функции sys_sort_by_schedule])
+
+#eskd-scheme(
+  title: "Блок-схема функции\nsys_sort_by_schedule",
+  doc-code: "ГУИР.6-05-0611-05.420",
+  dev-name: "Минкевич",
+  prov-name: "Ковальчук",
+  group-name: "ЭВМ, гр. 558301",
+  paper-format: "a4",
+  vertical: true
+)[
+  #align(center + horizon)[
+    // Укажите правильное название вашей картинки для В
+    #image("sys_sort_by_schedule.png", width: 100%, height: 100%, fit: "contain")
+  ]
 ]
 
+
+// === ПРИЛОЖЕНИЕ Г ===
 #appendix("Г", "Код файла main.c")
+
 #set text(size: 10pt, font: "Courier New")
 ```c
 // Праграма "Аэрапорт": сістэма кіравання рэйсамі.
