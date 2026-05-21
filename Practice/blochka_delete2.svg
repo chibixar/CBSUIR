@@ -105,7 +105,7 @@
         <text x="0" y="-20" class="text">Прысв. знач.</text>
         <text x="0" y="20" class="text">flights[i] = flights[i+1]</text>
     </g>
-    <!-- ИСПРАВЛЕНА ОШИБКА -->
+    
     <path d="M 1100,725 L 1100,825" class="line" marker-end="url(#arrow)"/>
 
     <g transform="translate(1100, 900)">
@@ -123,11 +123,17 @@
         <text x="0" y="20" class="text">count = count - 1</text>
     </g>
 
-    <!-- Линия в блок "Конец" (с ранним выходом) -->
-    <path d="M 1100,1475 L 1100,1562.5" class="line" marker-end="url(#arrow)"/>
+    <!-- ================= ИЗМЕНЕННАЯ ЧАСТЬ ================= -->
+    
+    <!-- Линия вниз от "count = count - 1" до места соединения (Y = 1525) -->
+    <path d="M 1100,1475 L 1100,1525" class="line" />
+
+    <!-- Общая стрелка, входящая в блок "Конец" (от Y = 1525 до Y = 1562.5) -->
+    <path d="M 1100,1525 L 1100,1562.5" class="line" marker-end="url(#arrow)"/>
 
     <g transform="translate(1100, 1600)">
         <use href="#term"/>
         <text x="0" y="0" class="text">Конец</text>
     </g>
+    <!-- ==================================================== -->
 </svg>
