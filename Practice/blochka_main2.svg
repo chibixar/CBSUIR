@@ -37,6 +37,27 @@
         <use href="#proc"/>
         <text x="0" y="-20" class="text">выклік ф.</text>
         <text x="0" y="20" class="text">sys_init(&amp;sys)</text>
+
+        <!-- БЛОК КОММЕНТАРИЯ: Структуры AirportSystem и Flight -->
+        <line x1="150" y1="0" x2="180" y2="0" class="line" stroke-dasharray="8,6" />
+        <path d="M 190,-120 L 180,-120 L 180,240 L 190,240" class="line" />
+        <g style="text-anchor: start; dominant-baseline: central;">
+            <text x="200" y="-110" class="label" style="font-size: 18px;">struct AirportSystem {</text>
+            <text x="210" y="-85" class="label" style="font-size: 18px;">Flight flights[1024];</text>
+            <text x="210" y="-60" class="label" style="font-size: 18px;">int count;</text>
+            <text x="210" y="-35" class="label" style="font-size: 18px;">Stack history;</text>
+            <text x="210" y="-10" class="label" style="font-size: 18px;">Queue pendingQueue;</text>
+            <text x="210" y="15" class="label" style="font-size: 18px;">TreeNode *searchTree;</text>
+            <text x="200" y="40" class="label" style="font-size: 18px;">}</text>
+
+            <text x="200" y="80" class="label" style="font-size: 18px;">struct Flight {</text>
+            <text x="210" y="105" class="label" style="font-size: 18px;">char flightNumber[10];</text>
+            <text x="210" y="130" class="label" style="font-size: 18px;">char airline[50];</text>
+            <text x="210" y="155" class="label" style="font-size: 18px;">DateTime scheduleTime;</text>
+            <text x="210" y="180" class="label" style="font-size: 18px;">FlightStatus status;</text>
+            <text x="210" y="205" class="label" style="font-size: 18px;">...</text>
+            <text x="200" y="230" class="label" style="font-size: 18px;">}</text>
+        </g>
     </g>
     <path d="M 400,325 L 400,375" class="line" marker-end="url(#arrow)"/>
 
@@ -51,6 +72,17 @@
         <use href="#rect"/>
         <text x="0" y="-20" class="text">Прысв. знач.</text>
         <text x="0" y="20" class="text">attempts = 0</text>
+
+        <!-- БЛОК КОММЕНТАРИЯ: Структура User -->
+        <line x1="150" y1="0" x2="180" y2="0" class="line" stroke-dasharray="8,6" />
+        <path d="M 190,-60 L 180,-60 L 180,80 L 190,80" class="line" />
+        <g style="text-anchor: start; dominant-baseline: central;">
+            <text x="200" y="-50" class="label" style="font-size: 18px;">struct User {</text>
+            <text x="210" y="-25" class="label" style="font-size: 18px;">char username[30];</text>
+            <text x="210" y="0" class="label" style="font-size: 18px;">char password[30];</text>
+            <text x="210" y="25" class="label" style="font-size: 18px;">UserRole role;</text>
+            <text x="200" y="50" class="label" style="font-size: 18px;">}</text>
+        </g>
     </g>
     
     <!-- Точка слияния возврата цикла. Сразу после нее - стрелка в условие -->
@@ -113,11 +145,8 @@
         <text x="0" y="20" class="text">sys_free(&amp;sys)</text>
     </g>
     
-    <!-- ================= ИЗМЕНЕННАЯ ЧАСТЬ (ЛЕВАЯ ВЕТКА) ================= -->
     <!-- Линия уходит вниз и вправо к точке слияния перед общим Концом -->
     <path d="M 800,1700 L 800,2550 L 1200,2550" class="line" />
-    <!-- ==================================================================== -->
-
 
     <!-- ============================================================== -->
     <!-- ПРАВАЯ КОЛОНКА: Главное меню и Выход (Ось X = 1200)            -->
@@ -171,7 +200,7 @@
     <text x="1240" y="2110" class="label">Так</text>
     <text x="1380" y="1975" class="label">Не</text>
     
-    <!-- Ветка ТАК (вниз) (Здесь была ошибка в кавычках) -->
+    <!-- Ветка ТАК (вниз) -->
     <path d="M 1200,2075 L 1200,2125" class="line" marker-end="url(#arrow)"/>
     
     <!-- Ветка НЕ (вправо) -->
@@ -193,7 +222,6 @@
         <text x="0" y="20" class="text">sys_free(&amp;sys)</text>
     </g>
 
-    <!-- ================= ИЗМЕНЕННАЯ ЧАСТЬ (ПРАВАЯ ВЕТКА / ФИНАЛ) ================= -->
     <!-- Линия от правого блока sys_free вниз до точки слияния -->
     <path d="M 1200,2525 L 1200,2550" class="line" />
 
@@ -204,6 +232,5 @@
         <use href="#term"/>
         <text x="0" y="0" class="text">Конец</text>
     </g>
-    <!-- =========================================================================== -->
 
 </svg>
