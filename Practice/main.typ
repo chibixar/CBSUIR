@@ -289,7 +289,7 @@
 // =====================================================================
 
 // Импортируем вашу библиотеку для рамок ЕСКД
-#import "frames/template.typ": eskd-scheme
+#import "frames/template.typ": eskd-scheme, eskd-vedomost
 
 // Отключаем красную строку для блоков кода и картинок в приложениях
 #set par(first-line-indent: 0pt)
@@ -320,7 +320,7 @@
 
 #eskd-scheme(
   title: "Блок-схема функции\nmain",
-  doc-code: "ГУИР.6-05-0611-05.121", 
+  doc-code: "ГУИР.6-05-0611-05.121 ПД1", 
   dev-name: "Минкевич",
   prov-name: "Ковальчук",
   group-name: "ЭВМ, гр. 558301",
@@ -340,7 +340,7 @@
 
 #eskd-scheme(
   title: "Блок-схема функции\nsys_delete_flight",
-  doc-code: "ГУИР.6-05-0611-05.121",
+  doc-code: "ГУИР.6-05-0611-05.121 ПД2",
   dev-name: "Минкевич",
   prov-name: "Ковальчук",
   group-name: "ЭВМ, гр. 558301",
@@ -395,3 +395,57 @@
   raw(read("main.c"), lang: "c", block: true),
   caption: [Исходный код главного файла программы main.c],
 ) <listing-main>
+#[
+  #show: eskd-vedomost.with(
+    title: "Ведомость документов",
+    doc-code: "ГУИР.6-05-0611-05.121 Д1",
+    dev-name: "Минкевич",
+    prov-name: "Ковальчук",
+    group-name: "ЭВМ, гр. 558301"
+  )
+  #set text(font: "GOST Type B")
+
+  #set text(style: "normal")
+  #let er = ([], [], []) // Пустая строка для отступов
+
+  #place(top + left, dx: -5mm, dy: -20mm, block(
+    width: 185mm,
+    height: 242mm,
+    table(
+      columns: (60mm, 95mm, 30mm),
+      rows: (10mm, ..(8mm,) * 29), // 30 строк, ровно 242мм высоты до штампа
+      inset: (x: 2mm, y: 0pt),
+      stroke: 0.5mm + black, // Толщина совпадает с толщиной рамки ГОСТ
+      align: (x, y) => if y == 0 or x == 2 { center + horizon } else { left + horizon },
+
+      // Строка 1
+      table.cell(align: center)[Обозначение], table.cell(align: center)[Наименование], table.cell(align: center)[Примечание],
+      ..er, // 2
+      [], table.cell(align: center)[#underline[Графические документы]], [], // 3
+      ..er, // 4
+
+      // Строки 5-6
+      [ГУИР.6-05-0611-05.121 ПД1], [Схема алгоритма функции main()], [А4],
+      ..er, // 7
+
+      // Строки 8-10
+      [ГУИР.6-05-0611-05.121 ПД2], [Схема алгоритма функции sys_delete_flight()], [А4],
+      
+       // 11
+      ..er, // 12
+
+      // Строки 13-14
+      [], table.cell(align: center)[#underline[Текстовые документы]], [], 
+      ..er,
+
+      // Строки 15-17
+      [БГУИР.6-05-0611-05.121 ПЗ], [Справка аэропорта. Отчет по], [#context [ #counter(page).final().first() с. ]],
+      [], [учебной (ознакомительной)], [],
+      [], [практике], [],
+
+      // Добиваем пустые строки до 30 (использовано 17 строк, нужно еще 13)
+      ..er, ..er, ..er, ..er, ..er, ..er, ..er,
+      ..er, ..er, ..er, ..er, ..er, ..er
+       )
+  ))
+]
